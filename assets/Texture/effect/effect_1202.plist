@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>e_1202/e_1202_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{113,169}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{113,169}</string>
+			</dict>
+			<key>e_1202/e_1202_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,169},{113,169}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{113,169}</string>
+			</dict>
+			<key>e_1202/e_1202_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,338},{113,169}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{113,169}</string>
+			</dict>
+			<key>e_1202/e_1202_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,507},{113,169}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{113,169}</string>
+			</dict>
+			<key>e_1202/e_1202_05.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,676},{113,169}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{113,169}</string>
+			</dict>
+			<key>e_1202/e_1202_06.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,845},{113,169}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{113,169}</string>
+			</dict>
+			<key>e_1202/e_1202_07.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{113,0},{113,169}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{113,169}</string>
+			</dict>
+			<key>e_1202/e_1202_08.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{282,0},{113,169}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{113,169}</string>
+			</dict>
+			<key>e_1202/e_1202_09.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{451,0},{113,169}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{113,169}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>effect_1202.png</string>
+			<key>realTextureFileName</key>
+			<string>effect_1202.png</string>
+			<key>size</key>
+			<string>{620,1014}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>620</integer>
+			<key>height</key>
+			<integer>1014</integer>
+		</dict>
+	</dict>
+</plist>

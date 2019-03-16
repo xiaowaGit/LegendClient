@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>e_1025/e_1025_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,218},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,436},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,654},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_05.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{218,0},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_06.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{436,0},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_07.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{654,0},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_08.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{218,218},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_09.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{218,436},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_10.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{218,654},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_11.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{436,218},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_12.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{654,218},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+			<key>e_1025/e_1025_13.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{436,436},{218,218}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{218,218}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>effect_1025.png</string>
+			<key>realTextureFileName</key>
+			<string>effect_1025.png</string>
+			<key>size</key>
+			<string>{1024,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>

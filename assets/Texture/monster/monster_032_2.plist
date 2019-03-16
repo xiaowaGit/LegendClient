@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>m_032_2/m_032_2_0_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_0_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,280},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_0_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,560},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_1_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{200,0},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_1_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{480,0},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_1_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{760,0},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_2_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{200,200},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_2_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{480,200},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_2_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{760,280},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_3_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{200,400},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_3_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{480,400},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_3_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{760,560},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_4_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{200,600},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_4_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{400,600},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+			<key>m_032_2/m_032_2_4_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{400,800},{200,280}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{200,280}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>monster_032_2.png</string>
+			<key>realTextureFileName</key>
+			<string>monster_032_2.png</string>
+			<key>size</key>
+			<string>{1024,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>

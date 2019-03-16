@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>m_029_4/m_029_4_0_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_0_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,205},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_0_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,410},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_0_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,615},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_1_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,820},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_1_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{150,0},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_1_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{150,205},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_1_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{150,410},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_2_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{150,615},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_2_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{205,820},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_2_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{300,0},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_2_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{300,150},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_3_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{300,355},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_3_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{300,560},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_3_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{410,765},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_3_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{450,150},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_4_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{505,0},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_4_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{450,300},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_4_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{450,505},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+			<key>m_029_4/m_029_4_4_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{560,710},{150,205}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{150,205}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>monster_029_4.png</string>
+			<key>realTextureFileName</key>
+			<string>monster_029_4.png</string>
+			<key>size</key>
+			<string>{1024,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>

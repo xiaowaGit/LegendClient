@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>e_065/e_065_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{160,170}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{160,170}</string>
+			</dict>
+			<key>e_065/e_065_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,170},{160,170}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{160,170}</string>
+			</dict>
+			<key>e_065/e_065_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,340},{160,170}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{160,170}</string>
+			</dict>
+			<key>e_065/e_065_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,510},{160,170}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{160,170}</string>
+			</dict>
+			<key>e_065/e_065_05.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,680},{160,170}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{160,170}</string>
+			</dict>
+			<key>e_065/e_065_06.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,850},{160,170}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{160,170}</string>
+			</dict>
+			<key>e_065/e_065_07.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{160,0},{160,170}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{160,170}</string>
+			</dict>
+			<key>e_065/e_065_08.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{330,0},{160,170}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{160,170}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>effect_065.png</string>
+			<key>realTextureFileName</key>
+			<string>effect_065.png</string>
+			<key>size</key>
+			<string>{500,1020}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>500</integer>
+			<key>height</key>
+			<integer>1020</integer>
+		</dict>
+	</dict>
+</plist>

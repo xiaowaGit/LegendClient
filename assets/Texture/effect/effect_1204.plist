@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>e_1204/e_1204_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{82,82}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,82}</string>
+			</dict>
+			<key>e_1204/e_1204_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,82},{82,82}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,82}</string>
+			</dict>
+			<key>e_1204/e_1204_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,164},{82,82}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,82}</string>
+			</dict>
+			<key>e_1204/e_1204_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,246},{82,82}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,82}</string>
+			</dict>
+			<key>e_1204/e_1204_05.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,328},{82,82}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,82}</string>
+			</dict>
+			<key>e_1204/e_1204_06.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,410},{82,82}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,82}</string>
+			</dict>
+			<key>e_1204/e_1204_07.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,492},{82,82}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,82}</string>
+			</dict>
+			<key>e_1204/e_1204_08.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,574},{82,82}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,82}</string>
+			</dict>
+			<key>e_1204/e_1204_09.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,656},{82,82}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,82}</string>
+			</dict>
+			<key>e_1204/e_1204_10.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,738},{82,82}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,82}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>effect_1204.png</string>
+			<key>realTextureFileName</key>
+			<string>effect_1204.png</string>
+			<key>size</key>
+			<string>{82,820}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>82</integer>
+			<key>height</key>
+			<integer>820</integer>
+		</dict>
+	</dict>
+</plist>

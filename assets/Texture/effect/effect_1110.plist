@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>e_1110/e_1110_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+			<key>e_1110/e_1110_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,100},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+			<key>e_1110/e_1110_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,200},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+			<key>e_1110/e_1110_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,300},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+			<key>e_1110/e_1110_05.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,400},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+			<key>e_1110/e_1110_06.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,500},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+			<key>e_1110/e_1110_07.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,600},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+			<key>e_1110/e_1110_08.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,700},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+			<key>e_1110/e_1110_09.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,800},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+			<key>e_1110/e_1110_10.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,900},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>effect_1110.png</string>
+			<key>realTextureFileName</key>
+			<string>effect_1110.png</string>
+			<key>size</key>
+			<string>{100,1000}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>100</integer>
+			<key>height</key>
+			<integer>1000</integer>
+		</dict>
+	</dict>
+</plist>

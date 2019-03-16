@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>123/create_00.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{696,296},{281,333}}</string>
+				<key>offset</key>
+				<string>{-113,87}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{512,512}</string>
+			</dict>
+			<key>123/create_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{344,0},{315,352}}</string>
+				<key>offset</key>
+				<string>{-96,78}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{512,512}</string>
+			</dict>
+			<key>123/create_10.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{344,334}}</string>
+				<key>offset</key>
+				<string>{-82,87}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{512,512}</string>
+			</dict>
+			<key>123/create_11.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{344,315},{246,349}}</string>
+				<key>offset</key>
+				<string>{-131,80}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{512,512}</string>
+			</dict>
+			<key>123/create_20.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{696,0},{296,320}}</string>
+				<key>offset</key>
+				<string>{-106,94}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{512,512}</string>
+			</dict>
+			<key>123/create_21.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,334},{244,344}}</string>
+				<key>offset</key>
+				<string>{-132,82}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{512,512}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>player_select.png</string>
+			<key>realTextureFileName</key>
+			<string>player_select.png</string>
+			<key>size</key>
+			<string>{1016,629}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1016</integer>
+			<key>height</key>
+			<integer>629</integer>
+		</dict>
+	</dict>
+</plist>

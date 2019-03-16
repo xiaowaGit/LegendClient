@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>w_005_2/w_005_2_0_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_0_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,238},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_0_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,476},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_1_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,714},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_1_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{238,0},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_1_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{476,0},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_2_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{714,0},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_2_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{238,238},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_2_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{238,476},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_3_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{238,714},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_3_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{476,238},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_3_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{714,238},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_4_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{476,476},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_4_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{476,714},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+			<key>w_005_2/w_005_2_4_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{714,476},{238,238}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{238,238}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>player_arms_005_2.png</string>
+			<key>realTextureFileName</key>
+			<string>player_arms_005_2.png</string>
+			<key>size</key>
+			<string>{1024,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>

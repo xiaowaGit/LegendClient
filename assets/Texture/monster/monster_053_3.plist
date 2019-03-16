@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>m_053_3/m_053_3_0_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_0_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,157},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_0_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,314},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_1_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,471},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_1_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,628},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_1_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,785},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_2_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{142,0},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_2_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{299,0},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_2_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{456,0},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_3_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{613,0},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_3_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{770,0},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_3_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{142,142},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_4_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{142,299},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_4_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{142,456},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+			<key>m_053_3/m_053_3_4_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{142,613},{142,157}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{142,157}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>monster_053_3.png</string>
+			<key>realTextureFileName</key>
+			<string>monster_053_3.png</string>
+			<key>size</key>
+			<string>{1024,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>
