@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>e_1211/e_1211_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{115,115}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{115,115}</string>
+			</dict>
+			<key>e_1211/e_1211_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,115},{115,115}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{115,115}</string>
+			</dict>
+			<key>e_1211/e_1211_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,230},{115,115}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{115,115}</string>
+			</dict>
+			<key>e_1211/e_1211_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,345},{115,115}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{115,115}</string>
+			</dict>
+			<key>e_1211/e_1211_05.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,460},{115,115}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{115,115}</string>
+			</dict>
+			<key>e_1211/e_1211_06.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,575},{115,115}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{115,115}</string>
+			</dict>
+			<key>e_1211/e_1211_07.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,690},{115,115}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{115,115}</string>
+			</dict>
+			<key>e_1211/e_1211_08.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,805},{115,115}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{115,115}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>effect_1211.png</string>
+			<key>realTextureFileName</key>
+			<string>effect_1211.png</string>
+			<key>size</key>
+			<string>{115,920}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>115</integer>
+			<key>height</key>
+			<integer>920</integer>
+		</dict>
+	</dict>
+</plist>

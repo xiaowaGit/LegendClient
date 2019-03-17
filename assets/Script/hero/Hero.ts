@@ -2,6 +2,9 @@ import { GameUtils } from "../utils/GameUtils";
 
 const {ccclass, property} = cc._decorator;
 
+/// 角色Y轴偏移常量
+let OFFSET_Y:{} = {'人':30,'骷髅':40,'麒麟':50,'哮天犬':60};
+
 /// 身体常量
 let EMPTY_BODY:string = '001';//空的身体
 
@@ -32,6 +35,9 @@ export default class Hero extends cc.Component {
     hero:cc.Node = null;
 
     @property(cc.Animation)
+    select:cc.Animation = null;
+
+    @property(cc.Animation)
     hero_main:cc.Animation = null;
 
     @property(cc.Animation)
@@ -48,19 +54,35 @@ export default class Hero extends cc.Component {
     private hero_dir:string = DOWN_DIR;
 
     private last_animation_name:string = null;
+    private config_name:string = null;
 
     onLoad () {
         let pinus = GameUtils.getInstance().pinus;
         this.pinus = pinus;
         this.pinus.on("onMove",this.onMove.bind(this));
+
+        let self = this;
+        this.node.on(cc.Node.EventType.TOUCH_END,function (event:cc.Event.EventTouch) {
+            if (self.hero_name == GameUtils.player_info.player.player.name) return;
+            if (GameUtils.selete_target == self) {
+                GameUtils.attack_target = self;
+            }else{
+                GameUtils.selete_target = self;
+            }
+            event.stopPropagation();
+        },this)
+        this.select.node.active = false; //默认不显示
     }
 
     init(hero_name:string,player:any,main_camere:cc.Camera) {
         this.hero_name = hero_name;
         this.player = player;
+        this.config_name = player.config_name;
         this.main_camere = main_camere;
         this.play_animation(true);
         this.move_to();
+        this.hero_main.node.y = OFFSET_Y[this.config_name];
+        this.hero_arms.node.y = OFFSET_Y[this.config_name];
         this.is_init = true;
     }
 
@@ -124,7 +146,9 @@ export default class Hero extends cc.Component {
             let pot:{x:number,y:number} = {x:element.x,y:element.y};
             pot.x = pot.x*GameUtils.map_scale + GameUtils.map_scale/2;
             pot.y = pot.y*GameUtils.map_scale + GameUtils.map_scale/2;
-            let move_action:cc.FiniteTimeAction = cc.moveTo(data.speed/60,new cc.Vec2(pot.x,pot.y));
+            let move_action:cc.FiniteTimeAction;
+            if (index == 0)move_action = cc.moveTo(data.o_tick/60,new cc.Vec2(pot.x,pot.y));
+            else move_action = cc.moveTo(data.speed/60,new cc.Vec2(pot.x,pot.y));
             let action:cc.FiniteTimeAction = cc.sequence(run_action,move_action,run_end_action);
             action_arr.push(action);
         }
@@ -202,6 +226,8 @@ export default class Hero extends cc.Component {
 
     update (dt) {
         this.move_camere();
+        if (GameUtils.selete_target == this && this.select.node.active == false)this.select.node.active = true;
+        else if (GameUtils.selete_target != this && this.select.node.active)this.select.node.active = false;
     }
 
     ///////////////////////////////操作接口////////////////////////////////////

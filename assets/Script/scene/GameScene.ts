@@ -39,6 +39,7 @@ export default class GameScene extends cc.Component {
             let out:cc.Vec2 = new cc.Vec2();
             pot = self.main_camera.getCameraToWorldPoint(pot,out);
             self.goto(out);
+            GameUtils.attack_target = null;
         },this);
         this.create_other_man(player.other_players);
     }
