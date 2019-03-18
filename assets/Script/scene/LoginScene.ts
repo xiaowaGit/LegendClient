@@ -3,7 +3,7 @@ import { GameUtils } from "../utils/GameUtils";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class LoginScene extends cc.Component {
 
     @property(cc.EditBox)
     edit_name: cc.EditBox = null;
@@ -13,13 +13,14 @@ export default class NewClass extends cc.Component {
 
     onLoad () {
         let self = this;
-        this.btn_login.node.on(cc.Node.EventType.TOUCH_END,function () {
+        this.btn_login.node.on("click",function () {
             self.login();
         },this);
     }
 
     login() {
-
+        this.btn_login.enabled = false;//防止继续点击
+        this.btn_login.interactable = false;
         GameUtils.getInstance().init();
         var pinus = GameUtils.getInstance().pinus;
         var host = "127.0.0.1";
@@ -39,6 +40,8 @@ export default class NewClass extends cc.Component {
                     pinus.disconnect();
                     if(data.code === 500) {
                         console.log("xiaowa ========= queryEntry fail");
+                        this.btn_login.enabled = true;
+                        this.btn_login.interactable = true;
                         return;
                     }
                     callback(data.host, data.port);
@@ -59,6 +62,8 @@ export default class NewClass extends cc.Component {
 				}, function(data) {
 					if(data.error) {
                         console.log("xiaowa ========= entry fail");
+                        this.btn_login.enabled = true;
+                        this.btn_login.interactable = true;
 						return;
 					}else{
                         cc.log(data);

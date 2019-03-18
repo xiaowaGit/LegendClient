@@ -1,4 +1,5 @@
 import { GameUtils } from "../utils/GameUtils";
+import { get_l } from "../utils/tool";
 
 const {ccclass, property} = cc._decorator;
 
@@ -28,6 +29,9 @@ let UP_AND_LEFT_DIR:string = '7'; //需要反转
 /// 帧率常量(一秒6帧)
 let FRAME_RATE:number = 6;
 
+/// 追踪时间片（秒）
+let TRACE_SEC:number = 1;
+
 @ccclass
 export default class Hero extends cc.Component {
 
@@ -56,10 +60,17 @@ export default class Hero extends cc.Component {
     private last_animation_name:string = null;
     private config_name:string = null;
 
+    private trace_c_sec:number = 0;// 追踪当前秒数
+    private tarce_pot:{x:number,y:number} = null;// 当前追踪坐标
+
+    private attack_over_time:number = Date.now();//攻击CD记时
+    private attack_cd:number = 2;//攻击CD秒
+
     onLoad () {
         let pinus = GameUtils.getInstance().pinus;
         this.pinus = pinus;
         this.pinus.on("onMove",this.onMove.bind(this));
+        this.pinus.on("onAttack",this.onAttack.bind(this));
 
         let self = this;
         this.node.on(cc.Node.EventType.TOUCH_END,function (event:cc.Event.EventTouch) {
@@ -68,6 +79,7 @@ export default class Hero extends cc.Component {
                 GameUtils.attack_target = self;
             }else{
                 GameUtils.selete_target = self;
+                GameUtils.attack_target = null;
             }
             event.stopPropagation();
         },this)
@@ -90,27 +102,33 @@ export default class Hero extends cc.Component {
 
     }
 
-    public compute_dir(e_pot:{x:number,y:number}):string {
-        let o_pot:{x:number,y:number} = this.player.player.point;
+    private compute_dir(e_pot:{x:number,y:number},o_pot:{x:number,y:number}):string {
         let c_x:number = e_pot.x - o_pot.x;
         let c_y:number = e_pot.y - o_pot.y;
-        if (c_x == 0 && c_y == 1) {
+        if (c_x == 0 && c_y > 0) {
             return UP_DIR;
-        }else if (c_x == 1 && c_y == 1) {
+        }else if (c_x > 0 && c_y > 0) {
             return UP_AND_RIGHT_DIR;
-        }else if (c_x == 1 && c_y == 0) {
+        }else if (c_x > 0 && c_y == 0) {
             return RIGHT_DIR;
-        }else if (c_x == 1 && c_y == -1) {
+        }else if (c_x > 0 && c_y < 0) {
             return DOWN_AND_RIGHT_DIR;
-        }else if (c_x == 0 && c_y == -1) {
+        }else if (c_x == 0 && c_y < 0) {
             return DOWN_DIR;
-        }else if (c_x == -1 && c_y == -1) {
+        }else if (c_x < 0 && c_y < 0) {
             return DOWN_AND_LEFT_DIR;
-        }else if (c_x == -1 && c_y == 0) {
+        }else if (c_x < 0 && c_y == 0) {
             return LEFT_DIR;
-        }else if (c_x == -1 && c_y == 1) {
+        }else if (c_x < 0 && c_y > 0) {
             return UP_AND_LEFT_DIR;
+        }else if (c_x == 0 && c_y == 0) {
+            return LEFT_DIR;
         }
+    }
+
+    private compute_dir_by_self(e_pot:{x:number,y:number}):string {
+        let o_pot:{x:number,y:number} = this.player.player.point;
+        return this.compute_dir(e_pot,o_pot);
     }
 
     private set_o_pot(o_pot:{x:number,y:number}) { /////设置初始坐标
@@ -134,7 +152,7 @@ export default class Hero extends cc.Component {
             const element:{x:number,y:number} = path[index];
             if (index == path.length - 1 && !data.over) break;
             let run_action:cc.FiniteTimeAction = cc.callFunc(function() {
-                let current_dir:string = this.compute_dir(element);
+                let current_dir:string = this.compute_dir_by_self(element);
                 over_dir = current_dir;
                 this.hero_action = WALK_ACTION;
                 this.hero_dir = current_dir;
@@ -158,7 +176,8 @@ export default class Hero extends cc.Component {
             this.play_animation(true);
         }, this);
         action_arr.push(finished);
-        this.node.runAction(cc.sequence(action_arr));
+        if (action_arr.length > 1)this.node.runAction(cc.sequence(action_arr));
+        else this.node.runAction(finished);
     }
 
     ///播放动画
@@ -224,10 +243,66 @@ export default class Hero extends cc.Component {
         this.node.y = pot.y;
     }
 
-    update (dt) {
+    public get_pot():{x:number,y:number} {
+        return {x:this.player.player.point.x,y:this.player.player.point.y};
+    }
+
+    public get_name():string {
+        return this.hero_name;
+    }
+
+    private trace_target(dt:number) { //追踪目标
+        if (!this.main_camere)return;
+        if (!GameUtils.attack_target)return;
+        this.trace_c_sec += dt;
+        if (this.trace_c_sec >= TRACE_SEC) {
+            this.trace_c_sec = 0;
+            if (this.tarce_pot == null) {
+                this.tarce_pot = GameUtils.attack_target.get_pot();
+                this.goto(this.tarce_pot);
+            }else{
+                let target_pot:{x:number,y:number} = GameUtils.attack_target.get_pot();
+                if (this.tarce_pot.x != target_pot.x || this.tarce_pot.y != target_pot.y) {
+                    this.tarce_pot = GameUtils.attack_target.get_pot();
+                    this.goto(this.tarce_pot);
+                    return;
+                }else if (get_l(this.tarce_pot,this.get_pot()) < 2) {
+                    if (this.attack_over_time > Date.now())return;
+                    this.attack_over_time = Date.now() + this.attack_cd;
+                    this.attack(GameUtils.attack_target.get_name());
+                }else{
+                    this.goto(this.tarce_pot);
+                    return;
+                }
+            }
+        }
+    }
+
+    update (dt:number) {
         this.move_camere();
         if (GameUtils.selete_target == this && this.select.node.active == false)this.select.node.active = true;
         else if (GameUtils.selete_target != this && this.select.node.active)this.select.node.active = false;
+        this.trace_target(dt);
+    }
+
+    onAttack(data:any) {
+        if (!this.is_init || data.active != this.hero_name) return;
+        console.log(data);
+        this.node.stopAllActions();
+        let element:{x:number,y:number} = data.e_pot;
+        let current_dir:string = this.compute_dir_by_self(element);
+        let run_action:cc.FiniteTimeAction = cc.callFunc(function() {
+            this.hero_action = ATTACK_ACTION;
+            this.hero_dir = current_dir;
+            this.play_animation(false);
+        }, this);
+        let gap_action:cc.FiniteTimeAction = cc.delayTime(this.attack_cd);
+        let finished:cc.FiniteTimeAction = cc.callFunc(function() {
+            this.hero_action = STAND_ACTION;
+            this.hero_dir = current_dir;
+            this.play_animation(true);
+        }, this);
+        this.node.runAction(cc.sequence(run_action,gap_action,finished));
     }
 
     ///////////////////////////////操作接口////////////////////////////////////
@@ -241,6 +316,21 @@ export default class Hero extends cc.Component {
         }, function(data) {
             if(data.error) {
                 console.log("xiaowa ========= move_to fail");
+                return;
+            }else{
+                cc.log(data);
+            }
+        });
+    }
+
+    public attack(target: string) {
+        if (!this.is_init) return;
+        var route = "scene.sceneHandler.attack";
+        this.pinus.request(route, {
+            target: target
+        }, function(data) {
+            if(data.error) {
+                console.log("xiaowa ========= attack fail");
                 return;
             }else{
                 cc.log(data);
