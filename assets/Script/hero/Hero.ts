@@ -61,7 +61,7 @@ export default class Hero extends cc.Component {
     private config_name:string = null;
 
     private trace_c_sec:number = 0;// 追踪当前秒数
-    private tarce_pot:{x:number,y:number} = null;// 当前追踪坐标
+    public tarce_pot:{x:number,y:number} = null;// 当前追踪坐标
 
     private attack_over_time:number = Date.now();//攻击CD记时
     private attack_cd:number = 2;//攻击CD秒
@@ -255,7 +255,7 @@ export default class Hero extends cc.Component {
         if (!this.main_camere)return;
         if (!GameUtils.attack_target)return;
         this.trace_c_sec += dt;
-        if (this.trace_c_sec >= TRACE_SEC) {
+        if (this.trace_c_sec >= TRACE_SEC || this.tarce_pot == null) {
             this.trace_c_sec = 0;
             if (this.tarce_pot == null) {
                 this.tarce_pot = GameUtils.attack_target.get_pot();
@@ -270,9 +270,6 @@ export default class Hero extends cc.Component {
                     if (this.attack_over_time > Date.now())return;
                     this.attack_over_time = Date.now() + this.attack_cd;
                     this.attack(GameUtils.attack_target.get_name());
-                }else{
-                    this.goto(this.tarce_pot);
-                    return;
                 }
             }
         }

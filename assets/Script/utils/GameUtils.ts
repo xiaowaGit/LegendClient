@@ -11,6 +11,8 @@ export class GameUtils {
     public static selete_target:Hero = null;
     public static attack_target:Hero = null;
 
+    public static goto_gap:number = 250;//两次行走的操作的最短间隔
+
     public static getInstance():GameUtils {
         if (!GameUtils._instance) {
             GameUtils._instance = new GameUtils();

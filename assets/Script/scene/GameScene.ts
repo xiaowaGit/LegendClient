@@ -18,6 +18,8 @@ export default class GameScene extends cc.Component {
     private hero:Hero = null;
     private other_heros:Hero[] = [];
     private pinus:Pomelo = null;
+    private goto_time:number = 0;
+    private goto_out:cc.Vec2 = null;
 
     onLoad () {
 
@@ -38,8 +40,7 @@ export default class GameScene extends cc.Component {
             let pot:cc.Vec2 = event.getLocation();
             let out:cc.Vec2 = new cc.Vec2();
             pot = self.main_camera.getCameraToWorldPoint(pot,out);
-            self.goto(out);
-            GameUtils.attack_target = null;
+            self.goto_out = out;
         },this);
         this.create_other_man(player.other_players);
     }
@@ -70,5 +71,21 @@ export default class GameScene extends cc.Component {
         this.other_heros.push(hero);
         hero.node.parent = this.map.node;
     }
-    // update (dt) {}
+
+    update (dt) {
+        let now:number = Date.now();
+        let self = this;
+        function gogogo(out:cc.Vec2) {
+            self.goto(out);
+            self.goto_time = Date.now();
+            GameUtils.attack_target = null;
+            self.hero.tarce_pot = null;
+        }
+        if (now - this.goto_time > GameUtils.goto_gap) {
+            if (this.goto_out){
+                gogogo(this.goto_out);
+                this.goto_out = null;
+            }
+        }
+    }
 }
