@@ -21,7 +21,7 @@
       }
     ],
     "_active": true,
-    "_level": 3,
+    "_level": 1,
     "_components": [
       {
         "__id__": 5
@@ -172,7 +172,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "ca6409fa-9530-4d72-8823-812ebf7ae4d9"
     },
     "fileId": "99XrzlM05BmJoKMSGduTB/",
     "sync": false
@@ -202,7 +202,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "ca6409fa-9530-4d72-8823-812ebf7ae4d9"
     },
     "fileId": "4fcIzC5MtO6INRLWXuKiYa",
     "sync": false

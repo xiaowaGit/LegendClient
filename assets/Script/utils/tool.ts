@@ -140,6 +140,8 @@ export interface SkillBookConfig {
     effect_config?:EffectConfig;////effect的配置
 }
 
+export interface ResFloorInfo {name:string,point:Point,index:number};
+
 export function get_l(pot1:Point,pot2:Point):number {
     let x0:number = pot1.x;
     let y0:number = pot1.y;

@@ -10,6 +10,7 @@ export class GameUtils {
     public static map_scale:number = 20; //方块大小
     public static selete_target:Hero = null;
     public static attack_target:Hero = null;
+    public static self_player:Hero = null;
 
     public static goto_gap:number = 250;//两次行走的操作的最短间隔
 

@@ -1,5 +1,7 @@
 import Hero from "../hero/Hero";
 import { GameUtils } from "../utils/GameUtils";
+import { ResFloorInfo } from "../utils/tool";
+import ResFloor from "../res/ResFloor";
 
 const {ccclass, property} = cc._decorator;
 
@@ -9,14 +11,21 @@ export default class GameScene extends cc.Component {
     @property(cc.Prefab)
     hero_pre:cc.Prefab = null;
 
+    @property(cc.Prefab)
+    res_floor_pre:cc.Prefab = null;
+
     @property(cc.Sprite)
     map:cc.Sprite = null;
+
+    @property(cc.Node)
+    res_map:cc.Node = null;
 
     @property(cc.Camera)
     main_camera:cc.Camera = null;
 
     private hero:Hero = null;
     private other_heros:Hero[] = [];
+    private ress:ResFloor[] = [];
     private pinus:Pomelo = null;
     private goto_time:number = 0;
     private goto_out:cc.Vec2 = null;
@@ -26,6 +35,7 @@ export default class GameScene extends cc.Component {
         let pinus = GameUtils.getInstance().pinus;
         this.pinus = pinus;
         this.pinus.on("onCreate",this.onCreate.bind(this));
+        this.pinus.on("onCreateRes",this.onCreateRes.bind(this));
     }
 
     start () {
@@ -34,6 +44,7 @@ export default class GameScene extends cc.Component {
         let hero:Hero = node.getComponent(Hero);
         hero.init(player.player.player.name,player.player,this.main_camera);
         this.hero = hero;
+        GameUtils.self_player = hero;
         hero.node.parent = this.map.node;
         let self = this;
         this.map.node.on(cc.Node.EventType.TOUCH_END,function (event:cc.Event.EventTouch) {
@@ -43,6 +54,7 @@ export default class GameScene extends cc.Component {
             self.goto_out = out;
         },this);
         this.create_other_man(player.other_players);
+        this.create_ress(player.ress);
     }
 
     goto(local_pot:cc.Vec2) {
@@ -63,13 +75,29 @@ export default class GameScene extends cc.Component {
 
     onCreate(data:any,is_init:boolean = true) {
         let player:any = GameUtils.player_info;
-        if (is_init)
-        player.other_players.push(data);
+        if (is_init)player.other_players.push(data);
         let node = cc.instantiate(this.hero_pre);
         let hero:Hero = node.getComponent(Hero);
         hero.init(data.player.name,data,null);
         this.other_heros.push(hero);
         hero.node.parent = this.map.node;
+    }
+
+    create_ress(ress:ResFloorInfo[]) {
+        for (let index = 0; index < ress.length; index++) {
+            const element = ress[index];
+            this.onCreateRes(element,false);
+        }
+    }
+
+    onCreateRes(data:ResFloorInfo,is_init:boolean = true) {
+        let player:any = GameUtils.player_info;
+        if (is_init)player.ress.push(data);
+        let node = cc.instantiate(this.res_floor_pre);
+        let res:ResFloor = node.getComponent(ResFloor);
+        res.init(data);
+        this.ress.push(res);
+        res.node.parent = this.res_map;
     }
 
     update (dt) {
