@@ -77,7 +77,6 @@ export default class ResFloor extends cc.Component {
                     cc.log("拾取物品->",data);
                 }
             });
-            console.log("拾取物品");
         }
         event.stopPropagation();
     }

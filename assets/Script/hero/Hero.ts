@@ -1,5 +1,5 @@
 import { GameUtils } from "../utils/GameUtils";
-import { get_l } from "../utils/tool";
+import { get_l, Player } from "../utils/tool";
 
 const {ccclass, property} = cc._decorator;
 
@@ -49,7 +49,7 @@ export default class Hero extends cc.Component {
 
     private pinus:Pomelo = null;
     private hero_name:string = null;
-    private player:any = null;
+    private player:Player = null;
     private main_camere:cc.Camera = null;
     private is_init:boolean = false;
 

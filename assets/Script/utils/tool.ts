@@ -113,6 +113,7 @@ export interface ShoesConfig {
 
 export interface ResInfo {
     name:string;
+    index:number;
     type:'equipment'|'drug'|'skill_book';
     config:{};
 }
@@ -140,7 +141,37 @@ export interface SkillBookConfig {
     effect_config?:EffectConfig;////effect的配置
 }
 
-export interface ResFloorInfo {name:string,point:Point,index:number};
+export interface ResFloorInfo {
+    name:string;
+    point:Point;
+    index:number;
+}
+
+export interface PlayerInfo {
+    name:string;
+    blood:number;
+    blood_limit:number;
+    magic:number;
+    magic_limit:number;
+    physics_attack:number;
+    magic_attack:number;
+    physics_defense:number;
+    magic_defense:number;
+    point:Point;
+    speed:number;
+    is_die:boolean;
+}
+
+export interface Player {
+    arms:ResInfo;
+    helmet:ResInfo;
+    clothes:ResInfo;
+    shoes:ResInfo;
+    jewelry:ResInfo;
+    necklace:ResInfo;
+    player:PlayerInfo;
+    config_name:string;
+}
 
 export function get_l(pot1:Point,pot2:Point):number {
     let x0:number = pot1.x;
