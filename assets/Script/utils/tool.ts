@@ -163,12 +163,12 @@ export interface PlayerInfo {
 }
 
 export interface Player {
-    arms:ResInfo;
-    helmet:ResInfo;
-    clothes:ResInfo;
-    shoes:ResInfo;
-    jewelry:ResInfo;
-    necklace:ResInfo;
+    arms:ResInfo; //武器
+    helmet:ResInfo; //头盔
+    clothes:ResInfo; //衣服
+    shoes:ResInfo; //鞋子
+    jewelry:ResInfo; //首饰
+    necklace:ResInfo; //项链
     player:PlayerInfo;
     config_name:string;
 }

@@ -2,6 +2,7 @@ import Hero from "../hero/Hero";
 import { GameUtils } from "../utils/GameUtils";
 import { ResFloorInfo } from "../utils/tool";
 import ResFloor from "../res/ResFloor";
+import MainUI from "../ui/MainUI";
 
 const {ccclass, property} = cc._decorator;
 
@@ -22,6 +23,9 @@ export default class GameScene extends cc.Component {
 
     @property(cc.Camera)
     main_camera:cc.Camera = null;
+    
+    @property(MainUI)
+    main_ui:MainUI = null;
 
     private hero:Hero = null;
     private other_heros:Hero[] = [];

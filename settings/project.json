@@ -2,6 +2,10 @@
   "collision-matrix": [
     [
       true
+    ],
+    [
+      false,
+      false
     ]
   ],
   "design-resolution-height": 640,
@@ -20,7 +24,8 @@
   "fit-height": true,
   "fit-width": false,
   "group-list": [
-    "default"
+    "default",
+    "GAME_UI"
   ],
   "last-module-event-record-time": 0,
   "simulator-orientation": false,
