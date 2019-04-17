@@ -1,4 +1,5 @@
 import Hero from "../hero/Hero";
+import { GameInfo, ResInfo } from "./tool";
 
 export class GameUtils {
 
@@ -6,7 +7,8 @@ export class GameUtils {
     public windowTool:any = window;
     public pinus:Pomelo = null;
 
-    public static player_info:any = null;
+    public static player_info:GameInfo = null;
+    public static player_ress:ResInfo[] = null;
     public static map_scale:number = 20; //方块大小
     public static selete_target:Hero = null;
     public static attack_target:Hero = null;

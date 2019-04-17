@@ -1,5 +1,6 @@
 import PropertyUI from "./PropertyUI";
 import { GameUtils } from "../utils/GameUtils";
+import BagUI from "./BagUI";
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,9 +15,12 @@ export default class MainUI extends cc.Component {
 
     @property(PropertyUI)
     node_property: PropertyUI = null;
+    
+    @property(BagUI)
+    node_bag: BagUI = null;
 
     private is_open_property = false;
-
+    private is_open_bag = false;
     onLoad () {
         this.node_property.close();
         let self = this;
@@ -27,6 +31,15 @@ export default class MainUI extends cc.Component {
             } else {
                 self.node_property.close();
                 self.is_open_property = false;
+            }
+        },this);
+        this.btn_bag.node.on("click",function () {
+            if (self.is_open_bag == false) {
+                self.node_bag.open();
+                self.is_open_bag = true;
+            } else {
+                self.node_bag.close();
+                self.is_open_bag = false;
             }
         },this);
         this.node.active = true;
