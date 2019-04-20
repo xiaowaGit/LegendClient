@@ -1,4 +1,5 @@
 import { Point, Player, PlayerInfo, ResInfo } from "../utils/tool";
+import { GameUtils } from "../utils/GameUtils";
 
 const {ccclass, property} = cc._decorator;
 
@@ -99,6 +100,7 @@ export default class PropertyUI extends cc.Component {
         this.sp_property_bg.node.on(cc.Node.EventType.TOUCH_START,(event:cc.Event.EventTouch)=>{
             let pot:cc.Vec2 = event.getLocation();
             o_pot = pot;
+            GameUtils.res_info_ui.close();
         },this);
         this.sp_property_bg.node.on(cc.Node.EventType.TOUCH_MOVE,(event:cc.Event.EventTouch)=>{
             let pot:cc.Vec2 = event.getLocation();

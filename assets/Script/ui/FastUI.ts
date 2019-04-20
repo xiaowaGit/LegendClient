@@ -1,17 +1,21 @@
+import { GameUtils } from "../utils/GameUtils";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class FastUI extends cc.Component {
 
-    @property(cc.Label)
-    label: cc.Label = null;
+    @property([cc.Sprite])
+    grids: cc.Sprite[] = [];
 
-    // onLoad () {}
+    @property
+    type:string = '';
 
-    start () {
-
+    onLoad () {
+        GameUtils[this.type+"_fast_grids"] = this.grids;
     }
+
+    // start () {}
 
     // update (dt) {}
 }

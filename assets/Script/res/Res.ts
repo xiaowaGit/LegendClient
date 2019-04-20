@@ -62,7 +62,10 @@ export default class Res extends cc.Component {
     public touch_end(event:cc.Event.EventTouch) {
         if (this._init) {
             if (this.is_copy == false) { // 显示详情面板
-
+                let pot:cc.Vec2 = event.getLocation();
+                let out:cc.Vec2 = new cc.Vec2();
+                pot = GameUtils.ui_camera.getCameraToWorldPoint(pot,out);
+                GameUtils.res_info_ui.show(this._res_data,out);
             }
         }
         event.stopPropagation();

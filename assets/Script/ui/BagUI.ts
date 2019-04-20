@@ -1,5 +1,6 @@
 import { Point, ResInfo, Player } from "../utils/tool";
 import { GameUtils } from "../utils/GameUtils";
+import Res from "../res/Res";
 
 const {ccclass, property} = cc._decorator;
 
@@ -37,6 +38,7 @@ export default class BagUI extends cc.Component {
     private pinus:Pomelo = null;
     
     onLoad () {
+        this.init_ui();
         let pinus = GameUtils.getInstance().pinus;
         this.pinus = pinus;
 
@@ -45,6 +47,7 @@ export default class BagUI extends cc.Component {
         this.sp_bag_bg.node.on(cc.Node.EventType.TOUCH_START,(event:cc.Event.EventTouch)=>{
             let pot:cc.Vec2 = event.getLocation();
             o_pot = pot;
+            GameUtils.res_info_ui.close();
         },this);
         this.sp_bag_bg.node.on(cc.Node.EventType.TOUCH_MOVE,(event:cc.Event.EventTouch)=>{
             let pot:cc.Vec2 = event.getLocation();
@@ -57,11 +60,21 @@ export default class BagUI extends cc.Component {
         });
     }
 
+    init_ui() {
+        GameUtils.bag_grids = this.grids;
+        GameUtils.grid_arms = this.spr_arms;
+        GameUtils.grid_clothes = this.spr_clothes;
+        GameUtils.grid_helmet = this.spr_helmet;
+        GameUtils.grid_jewelry = this.spr_jewelry;
+        GameUtils.grid_necklace = this.spr_necklace;
+        GameUtils.grid_shoes = this.spr_shoes;
+    }
     // start () {}
 
     open () {
         let self = this;
         this.is_show = true;
+        this.node.active = true;
         function get_bag(){
             var p = new Promise(function(resolve, reject){
                 var route = "scene.sceneHandler.get_bag";
@@ -106,7 +119,16 @@ export default class BagUI extends cc.Component {
     }
 
     show () {
-        
+        for (let index = 0; index < 18; index++) {
+            const element:ResInfo = GameUtils.player_ress[index];
+            if (element) {
+                let spr:cc.Sprite = this.grids[index];
+                let node = cc.instantiate(this.res_pre);
+                let res:Res = node.getComponent(Res);
+                res.init(element);
+                res.node.parent = spr.node;
+            }
+        }
     }
 
     close () {

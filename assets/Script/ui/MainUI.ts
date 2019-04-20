@@ -1,6 +1,7 @@
 import PropertyUI from "./PropertyUI";
 import { GameUtils } from "../utils/GameUtils";
 import BagUI from "./BagUI";
+import ResInfoUI from "./ResInfoUI";
 
 const {ccclass, property} = cc._decorator;
 
@@ -19,10 +20,16 @@ export default class MainUI extends cc.Component {
     @property(BagUI)
     node_bag: BagUI = null;
 
+    @property(ResInfoUI)
+    node_res_info: ResInfoUI = null;
+
     private is_open_property = false;
     private is_open_bag = false;
     onLoad () {
         this.node_property.close();
+        this.node_bag.close();
+        this.node_res_info.close();
+        GameUtils.res_info_ui = this.node_res_info;
         let self = this;
         this.btn_property.node.on("click",function () {
             if (self.is_open_property == false) {

@@ -23,6 +23,9 @@ export default class GameScene extends cc.Component {
 
     @property(cc.Camera)
     main_camera:cc.Camera = null;
+
+    @property(cc.Camera)
+    ui_camera:cc.Camera = null;
     
     @property(MainUI)
     main_ui:MainUI = null;
@@ -35,7 +38,7 @@ export default class GameScene extends cc.Component {
     private goto_out:cc.Vec2 = null;
 
     onLoad () {
-
+        GameUtils.ui_camera = this.ui_camera;
         let pinus = GameUtils.getInstance().pinus;
         this.pinus = pinus;
         this.pinus.on("onCreate",this.onCreate.bind(this));
@@ -56,6 +59,7 @@ export default class GameScene extends cc.Component {
             let out:cc.Vec2 = new cc.Vec2();
             pot = self.main_camera.getCameraToWorldPoint(pot,out);
             self.goto_out = out;
+            GameUtils.res_info_ui.close();
         },this);
         this.create_other_man(player.other_players);
         this.create_ress(player.ress);
