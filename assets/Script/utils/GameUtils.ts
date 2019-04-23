@@ -1,6 +1,7 @@
 import Hero from "../hero/Hero";
 import { GameInfo, ResInfo } from "./tool";
 import ResInfoUI from "../ui/ResInfoUI";
+import BagUI from "../ui/BagUI";
 
 export class GameUtils {
 
@@ -15,6 +16,7 @@ export class GameUtils {
     public static attack_target:Hero = null;
     public static self_player:Hero = null;
     public static res_info_ui:ResInfoUI = null;
+    public static bag_ui:BagUI = null;
     public static ui_camera: cc.Camera = null;
 
     ///格子

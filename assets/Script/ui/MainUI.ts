@@ -30,6 +30,7 @@ export default class MainUI extends cc.Component {
         this.node_bag.close();
         this.node_res_info.close();
         GameUtils.res_info_ui = this.node_res_info;
+        GameUtils.bag_ui = this.node_bag;
         let self = this;
         this.btn_property.node.on("click",function () {
             if (self.is_open_property == false) {

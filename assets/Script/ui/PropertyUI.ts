@@ -145,7 +145,7 @@ export default class PropertyUI extends cc.Component {
         });
         if (res_info) {
             let spr_index:number = ARMS_LIST[res_info.name];
-            if (spr_index && this.show_arms_list[spr_index]) {
+            if (spr_index != null && this.show_arms_list[spr_index]) {
                 this.show_arms_list[spr_index].node.active = true;
             }
         }
@@ -157,7 +157,7 @@ export default class PropertyUI extends cc.Component {
         });
         if (res_info) {
             let spr_index:number = CLOTHES_LIST[res_info.name];
-            if (spr_index && this.show_back_list[spr_index]) {
+            if (spr_index != null && this.show_back_list[spr_index]) {
                 this.show_back_list[spr_index].node.active = true;
             }
         }

@@ -123,12 +123,31 @@ export default class BagUI extends cc.Component {
             const element:ResInfo = GameUtils.player_ress[index];
             if (element) {
                 let spr:cc.Sprite = this.grids[index];
+                spr.node.removeAllChildren();
                 let node = cc.instantiate(this.res_pre);
                 let res:Res = node.getComponent(Res);
-                res.init(element);
+                res.init(element,index);
                 res.node.parent = spr.node;
+            }else{
+                let spr:cc.Sprite = this.grids[index];
+                spr.node.removeAllChildren();
             }
         }
+        let self = this;
+        function add(spr:cc.Sprite,res_info:ResInfo) {
+            spr.node.removeAllChildren();
+            let node = cc.instantiate(self.res_pre);
+            let res:Res = node.getComponent(Res);
+            res.init(res_info,-1);
+            res.node.parent = spr.node;
+        }
+        let player:Player = GameUtils.player_info.player;
+        if (player.arms) add(this.spr_arms,player.arms);
+        if (player.clothes) add(this.spr_clothes,player.clothes);
+        if (player.helmet) add(this.spr_helmet,player.helmet);
+        if (player.jewelry) add(this.spr_jewelry,player.jewelry);
+        if (player.necklace) add(this.spr_necklace,player.necklace);
+        if (player.shoes) add(this.spr_shoes,player.shoes);
     }
 
     close () {
