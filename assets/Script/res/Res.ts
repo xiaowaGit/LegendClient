@@ -1,6 +1,7 @@
-import { Point, get_l, ResInfo, sleep } from "../utils/tool";
+import { Point, get_l, ResInfo, sleep, EffectConfig, PP } from "../utils/tool";
 import ResConfig from "./ResConfig";
 import { GameUtils } from "../utils/GameUtils";
+import SkillConfig from "./SkillConfig";
 
 const {ccclass, property} = cc._decorator;
 
@@ -19,6 +20,15 @@ export default class Res extends cc.Component {
     @property(cc.SpriteAtlas)
     iconx1_atlas:cc.SpriteAtlas = null;
 
+    @property(cc.Prefab)
+    res_pre:cc.Prefab = null;
+    
+    @property(cc.SpriteAtlas)
+    skill_atlas:cc.SpriteAtlas = null;
+
+    @property(cc.SpriteAtlas)
+    skillx1_atlas:cc.SpriteAtlas = null;
+
     private pinus: Pomelo;
     private type:'equipment'|'drug'|'skill_book' = null;
     private _res_data:ResInfo = null;
@@ -30,6 +40,8 @@ export default class Res extends cc.Component {
     private pot_end:Point = null;
     private pot_origin:cc.Vec2 = null;
 
+    private pp:PP = null;
+
     // onLoad () {}
 
     start () {
@@ -38,6 +50,7 @@ export default class Res extends cc.Component {
         this.res.node.on(cc.Node.EventType.TOUCH_START,this.touch_start,this);
         this.res.node.on(cc.Node.EventType.TOUCH_MOVE,this.touch_move,this);
         this.res.node.on(cc.Node.EventType.TOUCH_END,this.touch_end,this);
+        this.res.node.on(cc.Node.EventType.TOUCH_CANCEL,this.touch_cancel,this);
     }
 
     public init(res_data:ResInfo,index:number,is_copy:boolean = false) {
@@ -54,6 +67,14 @@ export default class Res extends cc.Component {
             }
         }else{
             console.error("ERROR:物品<"+res_data.name+">没有可用的显示资源。");
+        }
+        if (this.is_copy && this.type == 'skill_book') {
+            let config:{spr:string,atlas:string} = SkillConfig[res_data.name];
+            if (config.atlas == 'skill_atlas') {
+                this.res.spriteFrame = this.skill_atlas.getSpriteFrame(config.spr);
+            }else if (config.atlas == 'skillx1_atlas') {
+                this.res.spriteFrame = this.skillx1_atlas.getSpriteFrame(config.spr);
+            }
         }
         this._init = true;
     }
@@ -79,6 +100,7 @@ export default class Res extends cc.Component {
             this.pot_start = {x:pot.x,y:pot.y};
             this.pot_origin = pot;
             this.change_z();
+            this.pp = null;
         }
         event.stopPropagation();
     }
@@ -86,7 +108,15 @@ export default class Res extends cc.Component {
     public touch_move(event:cc.Event.EventTouch) {
         if (this._init && this.pot_origin) {
             let pot:cc.Vec2 = event.getLocation();
-            if (!this.is_copy || (this.is_copy && get_l(this.pot_origin,pot) < 50)) {
+            if (!this.is_copy || (this.is_copy && get_l(this.pot_start,pot) < 50)) {
+                if (this.is_copy && this.type == 'skill_book') {
+                    // console.log("get_l:",get_l(this.pot_start,pot));
+                    // 实时显示向量、距离信息
+                    this.compute_a(this.pot_start,pot);
+                    let config:any = this._res_data.config;
+                    let effect_info:EffectConfig = config.effect_config;
+                    if (this.pp) GameUtils.game_scene.draw_skill_range(this.pp,effect_info);
+                }
                 let c_pot:Point = {x:pot.x - this.pot_origin.x,y:pot.y - this.pot_origin.y};
                 this.node.x += c_pot.x;
                 this.node.y += c_pot.y;
@@ -113,11 +143,20 @@ export default class Res extends cc.Component {
                 else if (hurt_info.type == 'grid') this.use_grid(hurt_info.index);
                 this.node.x = 0;
                 this.node.y = 0;
-            }else if (this.is_copy) { //这就要使用技能了
-
+            }else if (this.is_copy) { //这就要使用技能了(物品只在这里使用，技能也可能在这里使用)
+                this.node.x = 0;
+                this.node.y = 0;
             }
         }
         event.stopPropagation();
+    }
+
+    public touch_cancel(event:cc.Event.EventTouch) {
+        this.node.x = 0;
+        this.node.y = 0;
+        if (this.is_copy) { //这就要使用技能了
+
+        }
     }
 
     private hurt(wrold_pot:cc.Vec2):{spr:cc.Sprite,type:'equipment'|'quick'|'grid'|null,index?:number} {
@@ -176,11 +215,24 @@ export default class Res extends cc.Component {
 
     private use_quick(spr:cc.Sprite) { //物品放入快捷栏
         console.log("xiaowa ========== 拖到快捷栏了");
+        if (this.type == 'skill_book' || this.type == 'drug') {
+            if (!this.self_copy) {
+                spr.node.removeAllChildren();
+                let node = cc.instantiate(this.res_pre);
+                let res:Res = node.getComponent(Res);
+                res.init(this._res_data,this._index,true);
+                res.node.parent = spr.node;
+                this.self_copy = res;
+            }else{
+                this.self_copy.node.parent = spr.node;
+            }
+        }
     }
 
     private use_grid(index:number) { // 移动物品到其他格子
         console.log("xiaowa ========== 拖到其他格子了");
         if (!this._init) return;
+        if (this.self_copy) this.self_copy.Destructor();
         var route = "scene.sceneHandler.exchange_res";
         this.pinus.request(route, {
             e_index:index,
@@ -202,6 +254,24 @@ export default class Res extends cc.Component {
         if (!this.is_copy && this.self_copy)this.self_copy.Destructor();
         this.self_copy = null;
         this.node.parent = null;
+    }
+
+    ///////////////////// 计算向量
+    private compute_a(o_pot:Point,e_pot:Point) {
+        let config:any = this._res_data.config;
+        if (config && config.effect_config) {
+            let effect_config:EffectConfig = config.effect_config;
+            let r_t_l:number = effect_config.attack_l;/// 技能实际攻击最长距离
+            let s_l:number = get_l(o_pot,e_pot);
+            let s_p:Point = {x:(e_pot.x - o_pot.x)/s_l,y:(e_pot.y - o_pot.y)/s_l}; /// 向量
+            let s_r:number = s_l / 50; /// 距离比例 ratio
+            let r_l:number = r_t_l * s_r;
+            let r_p_p:Point = {x:r_l*s_p.x,y:r_l*s_p.y}; // 精确格子向量(不是单位向量)用来换算成像素
+            let r_g_p:Point = {x:Math.floor(r_p_p.x),y:Math.floor(r_p_p.y)} // 目标点格子向量(不是单位向量)就是实际攻击的坐标
+            this.pp = {r_t_l,s_l,s_p,s_r,r_l,r_p_p,r_g_p};
+        }else{
+            this.pp = null;
+        }
     }
     // update (dt) {}
 }

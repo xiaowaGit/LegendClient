@@ -102,6 +102,18 @@ export default class Hero extends cc.Component {
 
     }
 
+    /// 服务器方向 转换为 本地 动画方向
+    public static dir_transform(dir:number) {
+        if (dir == 1) return DOWN_DIR;
+        else if (dir == 2) return DOWN_AND_LEFT_DIR;
+        else if (dir == 3) return LEFT_DIR;
+        else if (dir == 4) return UP_AND_LEFT_DIR;
+        else if (dir == 5) return UP_DIR;
+        else if (dir == 6) return UP_AND_RIGHT_DIR;
+        else if (dir == 7) return RIGHT_DIR;
+        else if (dir == 8) return DOWN_AND_RIGHT_DIR;
+    }
+
     private compute_dir(e_pot:{x:number,y:number},o_pot:{x:number,y:number}):string {
         let c_x:number = e_pot.x - o_pot.x;
         let c_y:number = e_pot.y - o_pot.y;

@@ -2,6 +2,7 @@ import Hero from "../hero/Hero";
 import { GameInfo, ResInfo } from "./tool";
 import ResInfoUI from "../ui/ResInfoUI";
 import BagUI from "../ui/BagUI";
+import GameScene from "../scene/GameScene";
 
 export class GameUtils {
 
@@ -18,6 +19,7 @@ export class GameUtils {
     public static res_info_ui:ResInfoUI = null;
     public static bag_ui:BagUI = null;
     public static ui_camera: cc.Camera = null;
+    public static game_scene: GameScene = null;
 
     ///格子
     public static down_fast_grids:cc.Sprite[] = null;

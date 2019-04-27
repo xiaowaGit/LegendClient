@@ -194,6 +194,15 @@
     "iconx1_atlas": {
       "__uuid__": "a2a9b84a-aa60-443e-b97e-530b47cf46e5"
     },
+    "res_pre": {
+      "__uuid__": "abf63eb9-b2ee-4994-99a5-2a716ce4edbf"
+    },
+    "skill_atlas": {
+      "__uuid__": "2f65ef99-0f27-42ee-b622-1192ab2671ee"
+    },
+    "skillx1_atlas": {
+      "__uuid__": "a81180b0-adbf-4f75-a4cc-9b22907f172d"
+    },
     "_id": ""
   },
   {

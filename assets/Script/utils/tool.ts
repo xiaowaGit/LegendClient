@@ -28,6 +28,7 @@ export interface EffectConfig {
     minus_one_physics_defense?:number;////单次物理防御减少
     minus_one_magic_defense?:number;/////单次魔法防御减少
     attack_l:number;////效果攻击距离
+    range_l:number;////效果攻击范围
     type:'attack'|'assist'|'hinder';//效果类型（攻击、辅助、障碍）
 }
 
@@ -189,4 +190,88 @@ export interface GameInfo {
     player:Player;
     other_players:Player[];
     ress:ResFloorInfo[];
+}
+
+export interface PP {
+    r_t_l:number,/// 技能实际攻击最长距离
+    s_l:number,/// small 指尖像素距离
+    s_p:Point,/// small 指尖单位向量
+    s_r:number,/// 距离比例 ratio
+    r_l:number,/// 精确攻击格子距离
+    r_p_p:Point,// 精确格子向量(不是单位向量)用来换算成像素
+    r_g_p:Point,// 目标点格子向量(不是单位向量)就是实际攻击的坐标
+}
+
+
+/*
+    4  5  6
+    3 dir 7
+    2  1  8
+*/
+export function compute_dir(e_pot:Point,o_pot:Point):number {
+    let x:number = e_pot.x - o_pot.x;
+    let y:number = e_pot.y - o_pot.y;
+    let l:number = Math.sqrt(x*x + y*y);
+    let dir:number;
+    function change (r:number){
+        return r/Math.PI*180;
+    }
+    if (x >= 0 && y >= 0) {
+        let a:number = Math.acos(x/l);
+        a = change(a);
+        if (a <= 15) dir = 7;
+        else if (a > 22.5 && a < 67.5) dir = 6;
+        else dir = 5;
+    }else if (x <= 0 && y >= 0) {
+        let a:number = Math.acos(-x/l);
+        a = change(a);
+        if (a <= 15) dir = 3;
+        else if (a > 22.5 && a < 67.5) dir = 4;
+        else dir = 5;
+    }else if (x <= 0 && y <= 0) {
+        let a:number = Math.acos(-x/l);
+        a = change(a);
+        if (a <= 15) dir = 3;
+        else if (a > 22.5 && a < 67.5) dir = 2;
+        else dir = 1;
+    }else if (x >= 0 && y <= 0) {
+        let a:number = Math.acos(x/l);
+        a = change(a);
+        if (a <= 15) dir = 7;
+        else if (a > 22.5 && a < 67.5) dir = 8;
+        else dir = 1;
+    }
+    return dir;
+}
+
+
+/*
+    4  5  6
+    3 dir 7
+    2  1  8
+    方向转换到向量
+*/
+export function dir_to_p(dir:number):Point {
+    if (dir == 1) return {x:0,y:-1};
+    else if (dir == 2) return {x:-1,y:-1};
+    else if (dir == 3) return {x:-1,y:0};
+    else if (dir == 4) return {x:-1,y:1};
+    else if (dir == 5) return {x:0,y:1};
+    else if (dir == 6) return {x:1,y:1};
+    else if (dir == 7) return {x:1,y:0};
+    else if (dir == 8) return {x:1,y:-1};
+}
+
+/*
+    沿向量方向的点列表
+*/
+export function p_to_pots(o_pot:Point,p:Point,l:number):Point[] {
+    let pots:Point[] = [];
+    let c_pot:Point = {x:o_pot.x,y:o_pot.y};
+    for (let i = 0; i < l; i++) {
+        c_pot.x += p.x;
+        c_pot.y += p.y;
+        pots.push({x:c_pot.x,y:c_pot.y});
+    }
+    return pots;
 }

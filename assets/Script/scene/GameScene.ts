@@ -1,6 +1,6 @@
 import Hero from "../hero/Hero";
 import { GameUtils } from "../utils/GameUtils";
-import { ResFloorInfo } from "../utils/tool";
+import { ResFloorInfo, PP, Point, EffectConfig, dir_to_p, compute_dir, p_to_pots } from "../utils/tool";
 import ResFloor from "../res/ResFloor";
 import MainUI from "../ui/MainUI";
 
@@ -21,6 +21,9 @@ export default class GameScene extends cc.Component {
     @property(cc.Node)
     res_map:cc.Node = null;
 
+    @property(cc.Graphics)
+    draw_layer:cc.Graphics = null;
+
     @property(cc.Camera)
     main_camera:cc.Camera = null;
 
@@ -39,6 +42,7 @@ export default class GameScene extends cc.Component {
 
     onLoad () {
         GameUtils.ui_camera = this.ui_camera;
+        GameUtils.game_scene = this;
         let pinus = GameUtils.getInstance().pinus;
         this.pinus = pinus;
         this.pinus.on("onCreate",this.onCreate.bind(this));
@@ -122,6 +126,47 @@ export default class GameScene extends cc.Component {
                 gogogo(this.goto_out);
                 this.goto_out = null;
             }
+        }
+    }
+
+    // 绘制技能攻击范围
+    draw_skill_range(pp:PP,effect_info:EffectConfig) {
+        if (!effect_info) return;
+        this.draw_layer.clear();
+        let r_t_l:number = pp.r_t_l;/// 技能实际攻击最长距离
+        let s_l:number = pp.s_l;
+        let s_p:Point = pp.s_p; /// 向量
+        let s_r:number = pp.s_r; /// 距离比例 ratio
+        let r_l:number = pp.r_l;
+        let r_p_p:Point = pp.r_p_p; // 精确格子向量(不是单位向量)用来换算成像素
+        let r_g_p:Point = pp.r_g_p; // 目标点格子向量(不是单位向量)就是实际攻击的坐标
+        let grid_w:number = GameUtils.map_scale;
+        let player_pot:Point = this.hero.get_pot();
+        let player_p_pot:Point = {x:player_pot.x*grid_w,y:player_pot.y*grid_w};
+        if (effect_info.name == "狂风斩") {
+            let ctx:cc.Graphics = this.draw_layer;
+            ctx.circle(player_p_pot.x,player_p_pot.y,r_t_l*grid_w);
+            ctx.fillColor = cc.Color.GREEN;
+            ctx.fill();
+            ctx.node.opacity = 100;
+        }else if (effect_info.name == "逐日剑法") {
+            let o_pot:Point = player_pot;
+            let e_pot:Point = {x:o_pot.x+r_g_p.x,y:o_pot.y+r_g_p.y};
+            let p:Point = dir_to_p(compute_dir(e_pot,o_pot));
+            let pots:Point[] = p_to_pots(o_pot,p,effect_info.attack_l);
+            pots.forEach(element => {
+                element.x *= grid_w;
+                element.y *= grid_w;
+            });
+            let ctx:cc.Graphics = this.draw_layer;
+            pots.forEach(element => {
+                ctx.rect(element.x,element.y,grid_w,grid_w);
+                ctx.fillColor = cc.Color.GREEN;
+                ctx.fill();
+            });
+            ctx.node.opacity = 100;
+        }else if (effect_info.name == "冰咆哮") {
+            
         }
     }
 }
