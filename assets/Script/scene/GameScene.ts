@@ -1,6 +1,6 @@
 import Hero from "../hero/Hero";
 import { GameUtils } from "../utils/GameUtils";
-import { ResFloorInfo, PP, Point, EffectConfig, dir_to_p, compute_dir, p_to_pots } from "../utils/tool";
+import { ResFloorInfo, PP, Point, EffectConfig, dir_to_p, compute_dir, p_to_pots, get_l } from "../utils/tool";
 import ResFloor from "../res/ResFloor";
 import MainUI from "../ui/MainUI";
 
@@ -129,6 +129,10 @@ export default class GameScene extends cc.Component {
         }
     }
 
+    // 绘制清理
+    draw_clear() {
+        this.draw_layer.clear();
+    }
     // 绘制技能攻击范围
     draw_skill_range(pp:PP,effect_info:EffectConfig) {
         if (!effect_info) return;
@@ -146,13 +150,15 @@ export default class GameScene extends cc.Component {
         if (effect_info.name == "狂风斩") {
             let ctx:cc.Graphics = this.draw_layer;
             ctx.circle(player_p_pot.x,player_p_pot.y,r_t_l*grid_w);
-            ctx.fillColor = cc.Color.GREEN;
+            let color = cc.Color.GREEN;
+            color.setA(100);
+            ctx.fillColor = color;
             ctx.fill();
-            ctx.node.opacity = 100;
         }else if (effect_info.name == "逐日剑法") {
             let o_pot:Point = player_pot;
             let e_pot:Point = {x:o_pot.x+r_g_p.x,y:o_pot.y+r_g_p.y};
             let p:Point = dir_to_p(compute_dir(e_pot,o_pot));
+            if (!p) return;
             let pots:Point[] = p_to_pots(o_pot,p,effect_info.attack_l);
             pots.forEach(element => {
                 element.x *= grid_w;
@@ -161,12 +167,50 @@ export default class GameScene extends cc.Component {
             let ctx:cc.Graphics = this.draw_layer;
             pots.forEach(element => {
                 ctx.rect(element.x,element.y,grid_w,grid_w);
-                ctx.fillColor = cc.Color.GREEN;
+                let color = cc.Color.GREEN;
+                color.setA(100);
+                ctx.fillColor = color;
                 ctx.fill();
             });
-            ctx.node.opacity = 100;
-        }else if (effect_info.name == "冰咆哮") {
-            
+        }else if (effect_info.name == "冰咆哮" || effect_info.name == "流星火雨") {
+            let ctx:cc.Graphics = this.draw_layer;
+            ctx.circle(player_p_pot.x,player_p_pot.y,r_t_l*grid_w);
+            let color = cc.Color.GREEN;
+            color.setA(100);
+            ctx.fillColor = color;
+            ctx.fill();
+            let e_pot:Point = {x:player_pot.x+r_p_p.x,y:player_pot.y+r_p_p.y};
+            e_pot = {x:e_pot.x * grid_w,y:e_pot.y * grid_w};
+            ctx.circle(e_pot.x,e_pot.y,effect_info.range_l*grid_w);
+            let color2 = cc.Color.BLUE;
+            color2.setA(100);
+            ctx.fillColor = color2;
+            ctx.fill();
+        }else if (effect_info.name == "灭天火" || effect_info.name == "噬血术" || effect_info.name == "治愈术") {
+            let ctx:cc.Graphics = this.draw_layer;
+            ctx.circle(player_p_pot.x,player_p_pot.y,r_t_l*grid_w);
+            let color = cc.Color.GREEN;
+            color.setA(100);
+            ctx.fillColor = color;
+            ctx.fill();
+            let target:Hero = GameUtils.selete_target;
+            if (target) {
+                let e_pot:Point = target.get_pot();
+                let e_p_pot:Point = {x:e_pot.x * grid_w,y:e_pot.y * grid_w};
+                if (get_l(player_pot,e_pot) <= effect_info.attack_l) {
+                    ctx.circle(e_p_pot.x,e_p_pot.y,1*grid_w);
+                    let color2 = cc.Color.BLUE;
+                    color2.setA(100);
+                    ctx.fillColor = color2;
+                    ctx.fill();
+                }else{
+                    ctx.circle(e_p_pot.x,e_p_pot.y,1*grid_w);
+                    let color2 = cc.Color.RED;
+                    color2.setA(100);
+                    ctx.fillColor = color2;
+                    ctx.fill();
+                }
+            }
         }
     }
 }

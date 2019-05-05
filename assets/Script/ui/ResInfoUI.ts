@@ -115,7 +115,7 @@ export default class ResInfoUI extends cc.Component {
                 node_info.addComponent(cc.Label);
                 let info:cc.Label = node_info.getComponent(cc.Label);
                 info.fontSize = 20;
-                info.string = "技能类型:"+EFFECT_NAME[config.type];
+                info.string = "技能类型:"+EFFECT_NAME[eff_c.type];
                 cell.addChild(info.node);
                 info.node.position = new cc.Vec2(0,off_y);
                 off_y += add_y;

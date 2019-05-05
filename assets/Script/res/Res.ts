@@ -120,6 +120,8 @@ export default class Res extends cc.Component {
                 let c_pot:Point = {x:pot.x - this.pot_origin.x,y:pot.y - this.pot_origin.y};
                 this.node.x += c_pot.x;
                 this.node.y += c_pot.y;
+            }else if (this.is_copy) {
+                this.touch_cancel(event);
             }
             this.pot_origin = pot;
         }
@@ -134,6 +136,8 @@ export default class Res extends cc.Component {
                 let out:cc.Vec2 = new cc.Vec2();
                 pot = GameUtils.ui_camera.getCameraToWorldPoint(pot,out);
                 GameUtils.res_info_ui.show(this._res_data,out);
+                this.node.x = 0;
+                this.node.y = 0;
             }else if (this.is_copy == false && get_l(this.pot_start,this.pot_end) >= 20 && this._index != -1) { //装备物品或者设置快捷方式
                 let out:cc.Vec2 = new cc.Vec2();
                 pot = GameUtils.ui_camera.getCameraToWorldPoint(pot,out);
@@ -146,6 +150,7 @@ export default class Res extends cc.Component {
             }else if (this.is_copy) { //这就要使用技能了(物品只在这里使用，技能也可能在这里使用)
                 this.node.x = 0;
                 this.node.y = 0;
+                GameUtils.game_scene.draw_clear();
             }
         }
         event.stopPropagation();
@@ -154,8 +159,8 @@ export default class Res extends cc.Component {
     public touch_cancel(event:cc.Event.EventTouch) {
         this.node.x = 0;
         this.node.y = 0;
-        if (this.is_copy) { //这就要使用技能了
-
+        if (this.is_copy) { //这就要使用技能了(只有 逐日剑法、冰咆哮、流星火雨 才使用，其他技能按取消操作处理);物品也按取消操作处理
+            GameUtils.game_scene.draw_clear();
         }
     }
 
@@ -195,7 +200,6 @@ export default class Res extends cc.Component {
     }
 
     private use_res() { // 使用物品
-        console.log("xiaowa ========== 拖到装备栏了");
         if (!this._init) return;
         var route = "scene.sceneHandler.use_res";
         this.pinus.request(route, {
@@ -212,9 +216,25 @@ export default class Res extends cc.Component {
             }
         });
     }
+    
+    private uuse_res(target:string,pot:Point) { // 使用技能
+        if (!this._init) return;
+        var route = "scene.sceneHandler.uuse_res";
+        this.pinus.request(route, {
+            res_index: this._index,
+            target,
+            pot,
+        }, function(data) {
+            if(data.error) {
+                console.log("xiaowa ========= uuse_res fail");
+                return;
+            }else{
+                cc.log(data);
+            }
+        });
+    }
 
     private use_quick(spr:cc.Sprite) { //物品放入快捷栏
-        console.log("xiaowa ========== 拖到快捷栏了");
         if (this.type == 'skill_book' || this.type == 'drug') {
             if (!this.self_copy) {
                 spr.node.removeAllChildren();
@@ -230,7 +250,6 @@ export default class Res extends cc.Component {
     }
 
     private use_grid(index:number) { // 移动物品到其他格子
-        console.log("xiaowa ========== 拖到其他格子了");
         if (!this._init) return;
         if (this.self_copy) this.self_copy.Destructor();
         var route = "scene.sceneHandler.exchange_res";
