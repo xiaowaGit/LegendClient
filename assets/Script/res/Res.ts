@@ -1,4 +1,4 @@
-import { Point, get_l, ResInfo, sleep, EffectConfig, PP } from "../utils/tool";
+import { Point, get_l, ResInfo, sleep, EffectConfig, PP, SkillBookConfig } from "../utils/tool";
 import ResConfig from "./ResConfig";
 import { GameUtils } from "../utils/GameUtils";
 import SkillConfig from "./SkillConfig";
@@ -13,6 +13,9 @@ export default class Res extends cc.Component {
 
     @property(cc.Sprite)
     res: cc.Sprite = null;
+
+    @property(cc.Label)
+    lbl_cd: cc.Label = null;
 
     @property(cc.SpriteAtlas)
     icon_atlas:cc.SpriteAtlas = null;
@@ -38,6 +41,7 @@ export default class Res extends cc.Component {
     private is_copy:boolean = false;
     private pot_start:Point = null;
     private pot_end:Point = null;
+    private cd_time:number = 0; // cd 倒计时
     private pot_origin:cc.Vec2 = null;
 
     private pp:PP = null;
@@ -50,7 +54,7 @@ export default class Res extends cc.Component {
         this.res.node.on(cc.Node.EventType.TOUCH_START,this.touch_start,this);
         this.res.node.on(cc.Node.EventType.TOUCH_MOVE,this.touch_move,this);
         this.res.node.on(cc.Node.EventType.TOUCH_END,this.touch_end,this);
-        this.res.node.on(cc.Node.EventType.TOUCH_CANCEL,this.touch_cancel,this);
+        // this.res.node.on(cc.Node.EventType.TOUCH_CANCEL,this.touch_cancel,this);
     }
 
     public init(res_data:ResInfo,index:number,is_copy:boolean = false) {
@@ -58,6 +62,8 @@ export default class Res extends cc.Component {
         this._index = index;
         this.type = res_data.type;
         this.is_copy = is_copy;
+        this.cd_time = 0;
+        this.lbl_cd.node.active = false;
         let config:{spr:string,atlas:string} = ResConfig[res_data.name];
         if (config) {
             if (config.atlas == 'icon_atlas') {
@@ -151,6 +157,29 @@ export default class Res extends cc.Component {
                 this.node.x = 0;
                 this.node.y = 0;
                 GameUtils.game_scene.draw_clear();
+                if (this.type == 'skill_book' && this.cd_time == 0) {
+                    let config:SkillBookConfig = <SkillBookConfig>this._res_data.config;
+                    let effect_info:EffectConfig = config.effect_config;
+                    if (effect_info && (effect_info.name == "逐日剑法" || effect_info.name == "冰咆哮" || effect_info.name == "流星火雨")) {
+                        if (this.pp) {
+                            let {r_t_l,s_l,s_p,s_r,r_l,r_p_p,r_g_p} = this.pp;
+                            let player_pot:Point = GameUtils.player_info.player.player.point;
+                            let pot:Point = {x:player_pot.x + r_g_p.x,y:player_pot.y + r_g_p.y};
+                            this.uuse_res('',pot);
+                            this.tick_cd(config.cd);
+                        }
+                    }else if (effect_info && (effect_info.name == "烈火" || effect_info.name == "灭天火" || effect_info.name == "噬血术")) {
+                        if (GameUtils.selete_target) {
+                            this.uuse_res(GameUtils.selete_target.get_name(),null);
+                            this.tick_cd(config.cd);
+                        }
+                    }else if (effect_info && (effect_info.name == "狂风斩" || effect_info.name == "治愈术" || effect_info.name == "骷髅" || effect_info.name == "麒麟" || effect_info.name == "哮天犬")) {
+                        this.uuse_res('',null);
+                        this.tick_cd(config.cd);
+                    }
+                }else if (this.type == 'drug') {
+                    this.use_res();
+                }
             }
         }
         event.stopPropagation();
@@ -161,6 +190,17 @@ export default class Res extends cc.Component {
         this.node.y = 0;
         if (this.is_copy) { //这就要使用技能了(只有 逐日剑法、冰咆哮、流星火雨 才使用，其他技能按取消操作处理);物品也按取消操作处理
             GameUtils.game_scene.draw_clear();
+            if (this.type == 'skill_book' && this.cd_time == 0) {
+                let config:SkillBookConfig = <SkillBookConfig>this._res_data.config;
+                let effect_info:EffectConfig = config.effect_config;
+                if (effect_info && (effect_info.name == "逐日剑法" || effect_info.name == "冰咆哮" || effect_info.name == "流星火雨")) {
+                    let {r_t_l,s_l,s_p,s_r,r_l,r_p_p,r_g_p} = this.pp;
+                    let player_pot:Point = GameUtils.player_info.player.player.point;
+                    let pot:Point = {x:player_pot.x + r_g_p.x,y:player_pot.y + r_g_p.y};
+                    this.uuse_res('',pot);
+                    this.tick_cd(config.cd);
+                }
+            }
         }
     }
 
@@ -197,6 +237,31 @@ export default class Res extends cc.Component {
             if (grid && is_hurt(wrold_pot,grid,"down_fast_grids_"+i))return {spr:grid,type:'quick',index:i};
         }
         return {spr:null,type:null};
+    }
+
+    /**
+     * cd_time 倒计时
+     */
+    private tick_cd(cd:number) {
+        this.cd_time = cd;
+        this.lbl_cd.string = ""+cd;
+        this.lbl_cd.node.active = true;
+        let action_arr:cc.FiniteTimeAction[] = [];
+        for (let index = 0; index < cd; index++) {
+            let action_cd:cc.FiniteTimeAction = cc.delayTime(1);
+            let action_lbl:cc.FiniteTimeAction = cc.callFunc(function() {
+                this.cd_time--;
+                this.lbl_cd.string = ""+this.cd_time;
+            },this);
+            let action:cc.FiniteTimeAction = cc.sequence(action_cd,action_lbl);
+            action_arr.push(action);
+        }
+        let action_end:cc.FiniteTimeAction = cc.callFunc(function() {
+            this.cd_time = 0;
+            this.lbl_cd.node.active = false;
+        },this);
+        action_arr.push(action_end);
+        this.node.runAction(cc.sequence(action_arr));
     }
 
     private use_res() { // 使用物品
@@ -271,6 +336,7 @@ export default class Res extends cc.Component {
 
     private Destructor() {
         if (!this.is_copy && this.self_copy)this.self_copy.Destructor();
+        this.node.stopAllActions();
         this.self_copy = null;
         this.node.parent = null;
     }
