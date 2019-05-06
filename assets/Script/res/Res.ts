@@ -163,8 +163,9 @@ export default class Res extends cc.Component {
                     if (effect_info && (effect_info.name == "逐日剑法" || effect_info.name == "冰咆哮" || effect_info.name == "流星火雨")) {
                         if (this.pp) {
                             let {r_t_l,s_l,s_p,s_r,r_l,r_p_p,r_g_p} = this.pp;
-                            let player_pot:Point = GameUtils.player_info.player.player.point;
+                            let player_pot:Point = GameUtils.self_player.get_pot();
                             let pot:Point = {x:player_pot.x + r_g_p.x,y:player_pot.y + r_g_p.y};
+                            console.log("player_pot:",player_pot,"e_pot:",pot);
                             this.uuse_res('',pot);
                             this.tick_cd(config.cd);
                         }
@@ -243,6 +244,7 @@ export default class Res extends cc.Component {
      * cd_time 倒计时
      */
     private tick_cd(cd:number) {
+        if (cd == 0) return;
         this.cd_time = cd;
         this.lbl_cd.string = ""+cd;
         this.lbl_cd.node.active = true;

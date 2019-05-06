@@ -71,6 +71,8 @@ export default class Hero extends cc.Component {
         this.pinus = pinus;
         this.pinus.on("onMove",this.onMove.bind(this));
         this.pinus.on("onAttack",this.onAttack.bind(this));
+        this.pinus.on("onRagingFire",this.onRagingFire.bind(this));
+        this.pinus.on("onPursueSun",this.onPursueSun.bind(this));
 
         let self = this;
         this.node.on(cc.Node.EventType.TOUCH_END,function (event:cc.Event.EventTouch) {
@@ -313,7 +315,55 @@ export default class Hero extends cc.Component {
         }, this);
         this.node.runAction(cc.sequence(run_action,gap_action,finished));
     }
+    /***
+     * 烈火
+     */
+    onRagingFire(data:any) {
+        if (!this.is_init || data.active != this.hero_name) return;
+        console.log(data);
+        this.node.stopAllActions();
+        let element:{x:number,y:number} = data.e_pot;
+        let current_dir:string = this.compute_dir_by_self(element);
+        ///todo:播放烈火特效
 
+        let run_action:cc.FiniteTimeAction = cc.callFunc(function() {
+            this.hero_action = ATTACK_ACTION;
+            this.hero_dir = current_dir;
+            this.play_animation(false);
+        }, this);
+        let gap_action:cc.FiniteTimeAction = cc.delayTime(this.attack_cd);
+        let finished:cc.FiniteTimeAction = cc.callFunc(function() {
+            this.hero_action = STAND_ACTION;
+            this.hero_dir = current_dir;
+            this.play_animation(true);
+        }, this);
+        this.node.runAction(cc.sequence(run_action,gap_action,finished));
+    }
+    /**
+     * 逐日剑法
+     * @param data 
+     */
+    onPursueSun(data:any) {
+        if (!this.is_init || data.active != this.hero_name) return;
+        console.log(data);
+        this.node.stopAllActions();
+        let dir:number = data.dir;
+        let current_dir:string = Hero.dir_transform(dir);
+        ///todo:播放烈火特效
+
+        let run_action:cc.FiniteTimeAction = cc.callFunc(function() {
+            this.hero_action = ATTACK_ACTION;
+            this.hero_dir = current_dir;
+            this.play_animation(false);
+        }, this);
+        let gap_action:cc.FiniteTimeAction = cc.delayTime(this.attack_cd);
+        let finished:cc.FiniteTimeAction = cc.callFunc(function() {
+            this.hero_action = STAND_ACTION;
+            this.hero_dir = current_dir;
+            this.play_animation(true);
+        }, this);
+        this.node.runAction(cc.sequence(run_action,gap_action,finished));
+    }
     ///////////////////////////////操作接口////////////////////////////////////
     
     public goto(pot:{x:number,y:number}) {
