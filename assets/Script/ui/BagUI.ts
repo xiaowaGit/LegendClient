@@ -102,6 +102,7 @@ export default class BagUI extends cc.Component {
                             return reject();
                         }else{
                             GameUtils.player_info.player = data;
+                            GameUtils.self_player.update_player(data);
                             return resolve();
                         }
                     }

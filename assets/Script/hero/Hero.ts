@@ -88,6 +88,10 @@ export default class Hero extends cc.Component {
         this.select.node.active = false; //默认不显示
     }
 
+    public update_player(player:Player) {
+        this.player = player;
+    }
+
     init(hero_name:string,player:any,main_camere:cc.Camera) {
         this.hero_name = hero_name;
         this.player = player;
