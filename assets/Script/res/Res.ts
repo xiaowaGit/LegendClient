@@ -181,6 +181,7 @@ export default class Res extends cc.Component {
                     }
                 }else if (this.type == 'drug') {
                     this.use_res();
+                    this.Destructor();
                 }
             }
         }
