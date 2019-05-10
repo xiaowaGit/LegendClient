@@ -11,11 +11,14 @@ export default class LoginScene extends cc.Component {
     @property(cc.Button)
     btn_login: cc.Button = null;
 
+    private _onCreate: any;
+
     onLoad () {
         let self = this;
         this.btn_login.node.on("click",function () {
             self.login();
         },this);
+        this._onCreate = this.onCreate.bind(this);
     }
 
     login() {
@@ -26,6 +29,7 @@ export default class LoginScene extends cc.Component {
         var host = "127.0.0.1";
         var username:string = this.edit_name.string;
 
+        let self = this;
         // query connector
         function queryEntry(uid, callback) {
             var route = 'gate.gateHandler.queryEntry';
@@ -40,8 +44,8 @@ export default class LoginScene extends cc.Component {
                     pinus.disconnect();
                     if(data.code === 500) {
                         console.log("xiaowa ========= queryEntry fail");
-                        this.btn_login.enabled = true;
-                        this.btn_login.interactable = true;
+                        self.btn_login.enabled = true;
+                        self.btn_login.interactable = true;
                         return;
                     }
                     callback(data.host, data.port);
@@ -62,18 +66,30 @@ export default class LoginScene extends cc.Component {
 				}, function(data) {
 					if(data.error) {
                         console.log("xiaowa ========= entry fail");
-                        this.btn_login.enabled = true;
-                        this.btn_login.interactable = true;
+                        self.btn_login.enabled = true;
+                        self.btn_login.interactable = true;
 						return;
 					}else{
                         cc.log(data);
                         GameUtils.player_info = data;
+                        pinus.on("onCreate",self._onCreate);
                         cc.director.loadScene("GameScene");
                     }
 				});
 			});
         });
         
+    }
+
+    onCreate(data:any,is_init:boolean = true) {
+        let player:any = GameUtils.player_info;
+        if (is_init)player.other_players.push(data);
+    }
+
+    onDestroy() {
+        var pinus = GameUtils.getInstance().pinus;
+        pinus.off("onCreate",this._onCreate);
+        console.log("xiaowa =========== loginScene onDestroy");
     }
 
     start ( ) {

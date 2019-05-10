@@ -1,5 +1,6 @@
 import { GameUtils } from "../utils/GameUtils";
-import { get_l, Player } from "../utils/tool";
+import { get_l, Player, ClothesConfig, ArmsConfig } from "../utils/tool";
+import { get_body, get_arms } from "./HeroConfig";
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,7 +31,7 @@ let UP_AND_LEFT_DIR:string = '7'; //需要反转
 let FRAME_RATE:number = 6;
 
 /// 追踪时间片（秒）
-let TRACE_SEC:number = 1;
+let TRACE_SEC:number = 0.3;
 
 @ccclass
 export default class Hero extends cc.Component {
@@ -47,6 +48,9 @@ export default class Hero extends cc.Component {
     @property(cc.Animation)
     hero_arms:cc.Animation = null;
 
+    @property(cc.Animation)
+    spr_skill:cc.Animation = null;
+
     private pinus:Pomelo = null;
     private hero_name:string = null;
     private player:Player = null;
@@ -54,6 +58,7 @@ export default class Hero extends cc.Component {
     private is_init:boolean = false;
 
     private hero_body:string = EMPTY_BODY;
+    private hero_a:string = null;
     private hero_action:string = STAND_ACTION;
     private hero_dir:string = DOWN_DIR;
 
@@ -64,7 +69,7 @@ export default class Hero extends cc.Component {
     public tarce_pot:{x:number,y:number} = null;// 当前追踪坐标
 
     private attack_over_time:number = Date.now();//攻击CD记时
-    private attack_cd:number = 2;//攻击CD秒
+    private attack_cd:number = 1.1;//攻击CD秒
 
     onLoad () {
         let pinus = GameUtils.getInstance().pinus;
@@ -90,6 +95,8 @@ export default class Hero extends cc.Component {
 
     public update_player(player:Player) {
         this.player = player;
+        this.hero_body = get_body(player.clothes && <ClothesConfig>player.clothes.config);
+        this.hero_a = get_arms(player.arms && <ArmsConfig>player.arms.config);
     }
 
     init(hero_name:string,player:any,main_camere:cc.Camera) {
@@ -206,11 +213,17 @@ export default class Hero extends cc.Component {
             let time:number = state.time;
             frame = time * FRAME_RATE;
         }
+        /// 是否显示武器
+        this.hero_arms.node.active = this.hero_a ? true : false;
         let dir:number = parseInt(this.hero_dir);
         if (dir <= 4) {
             let animation_name:string = 'p_'+this.hero_body+'_'+this.hero_action+'_'+this.hero_dir;
             let state:cc.AnimationState = this.hero_main.play(animation_name);
             this.last_animation_name = animation_name;
+            let animation_a_name:string;
+            let state_a:cc.AnimationState;
+            if (this.hero_a) animation_a_name = 'a_'+this.hero_a+'_'+this.hero_action+'_'+this.hero_dir;
+            if (this.hero_a) state_a = this.hero_arms.play(animation_a_name);
             if (loop) {
                 state.wrapMode = cc.WrapMode.Loop;
                 state.repeatCount = Infinity;
@@ -219,6 +232,11 @@ export default class Hero extends cc.Component {
                 let next_frame:number = frame % total_frame + 1;
                 let new_time:number = next_frame / FRAME_RATE;
                 state.time = new_time;
+                if (state_a) {
+                    state_a.wrapMode = cc.WrapMode.Loop;
+                    state_a.repeatCount = Infinity;
+                    state_a.time = new_time;
+                }
             }
             this.hero.scaleX = 1;
         }else{
@@ -227,6 +245,10 @@ export default class Hero extends cc.Component {
             let animation_name:string = 'p_'+this.hero_body+'_'+this.hero_action+'_'+new_dir.toString();
             let state:cc.AnimationState = this.hero_main.play(animation_name);
             this.last_animation_name = animation_name;
+            let animation_a_name:string;
+            let state_a:cc.AnimationState;
+            if (this.hero_a) animation_a_name = 'a_'+this.hero_a+'_'+this.hero_action+'_'+new_dir.toString();
+            if (this.hero_a) state_a = this.hero_arms.play(animation_a_name);
             if (loop) {
                 state.wrapMode = cc.WrapMode.Loop;
                 state.repeatCount = Infinity;
@@ -235,6 +257,11 @@ export default class Hero extends cc.Component {
                 let next_frame:number = frame % total_frame + 1;
                 let new_time:number = next_frame / FRAME_RATE;
                 state.time = new_time;
+                if (state_a) {
+                    state_a.wrapMode = cc.WrapMode.Loop;
+                    state_a.repeatCount = Infinity;
+                    state_a.time = new_time;
+                }
             }
             this.hero.scaleX = -1;
         }
@@ -286,7 +313,7 @@ export default class Hero extends cc.Component {
                     return;
                 }else if (get_l(this.tarce_pot,this.get_pot()) < 2) {
                     if (this.attack_over_time > Date.now())return;
-                    this.attack_over_time = Date.now() + this.attack_cd;
+                    this.attack_over_time = Date.now() + this.attack_cd*1000;
                     this.attack(GameUtils.attack_target.get_name());
                 }
             }
@@ -328,18 +355,23 @@ export default class Hero extends cc.Component {
         this.node.stopAllActions();
         let element:{x:number,y:number} = data.e_pot;
         let current_dir:string = this.compute_dir_by_self(element);
-        ///todo:播放烈火特效
 
         let run_action:cc.FiniteTimeAction = cc.callFunc(function() {
             this.hero_action = ATTACK_ACTION;
             this.hero_dir = current_dir;
             this.play_animation(false);
+            ///播放烈火特效
+            let animation_name:string = 'e_031_'+this.hero_dir;
+            let state:cc.AnimationState = this.spr_skill.play(animation_name);
+            this.spr_skill.node.active = true;
         }, this);
         let gap_action:cc.FiniteTimeAction = cc.delayTime(this.attack_cd);
         let finished:cc.FiniteTimeAction = cc.callFunc(function() {
             this.hero_action = STAND_ACTION;
             this.hero_dir = current_dir;
             this.play_animation(true);
+            ///隐藏烈火
+            this.spr_skill.node.active = false;
         }, this);
         this.node.runAction(cc.sequence(run_action,gap_action,finished));
     }
