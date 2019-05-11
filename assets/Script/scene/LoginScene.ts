@@ -1,4 +1,5 @@
 import { GameUtils } from "../utils/GameUtils";
+import { GameInfo, Player } from "../utils/tool";
 
 const {ccclass, property} = cc._decorator;
 
@@ -81,9 +82,10 @@ export default class LoginScene extends cc.Component {
         
     }
 
-    onCreate(data:any,is_init:boolean = true) {
-        let player:any = GameUtils.player_info;
-        if (is_init)player.other_players.push(data);
+    onCreate(data:Player,is_init:boolean = true) {
+        let player:GameInfo = GameUtils.player_info;
+        if (is_init && data.player.name != player.player.player.name)player.other_players.push(data);
+        console.log("xiaowa ============onCreate :",data.player.name);
     }
 
     onDestroy() {

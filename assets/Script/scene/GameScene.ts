@@ -88,7 +88,7 @@ export default class GameScene extends cc.Component {
     onCreate(data:any,is_init:boolean = true) {
         let player:any = GameUtils.player_info;
         if (is_init)player.other_players.push(data);
-        if (data.player.name == this.hero.get_name()) return;
+        // if (data.player.name == this.hero.get_name()) return;
         let node = cc.instantiate(this.hero_pre);
         let hero:Hero = node.getComponent(Hero);
         hero.init(data.player.name,data,null);
