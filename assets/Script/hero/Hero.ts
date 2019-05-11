@@ -78,6 +78,7 @@ export default class Hero extends cc.Component {
         this.pinus.on("onAttack",this.onAttack.bind(this));
         this.pinus.on("onRagingFire",this.onRagingFire.bind(this));
         this.pinus.on("onPursueSun",this.onPursueSun.bind(this));
+        this.pinus.on("onUpdate",this.onUpdate.bind(this));
 
         let self = this;
         this.node.on(cc.Node.EventType.TOUCH_END,function (event:cc.Event.EventTouch) {
@@ -93,10 +94,20 @@ export default class Hero extends cc.Component {
         this.select.node.active = false; //默认不显示
     }
 
+    private onUpdate(data:Player) {
+        if (!this.is_init || data.player.name != this.hero_name) return;
+        this.update_player(data);
+    }
+
     public update_player(player:Player) {
         this.player = player;
         this.hero_body = get_body(player.clothes && <ClothesConfig>player.clothes.config);
         this.hero_a = get_arms(player.arms && <ArmsConfig>player.arms.config);
+        /// 更新全局数据
+        let other_players:Player[] = GameUtils.player_info.other_players;
+        other_players.forEach((player,index,array) => {
+            if (player.player.name == this.get_name()) array[index] = this.player;
+        },this);
     }
 
     init(hero_name:string,player:any,main_camere:cc.Camera) {
@@ -364,6 +375,8 @@ export default class Hero extends cc.Component {
             let animation_name:string = 'e_031_'+this.hero_dir;
             let state:cc.AnimationState = this.spr_skill.play(animation_name);
             this.spr_skill.node.active = true;
+            if (parseInt(this.hero_dir) > 4) this.spr_skill.node.scaleX = -1;
+            else this.spr_skill.node.scaleX = 1;
         }, this);
         let gap_action:cc.FiniteTimeAction = cc.delayTime(this.attack_cd);
         let finished:cc.FiniteTimeAction = cc.callFunc(function() {
@@ -374,6 +387,7 @@ export default class Hero extends cc.Component {
             this.spr_skill.node.active = false;
         }, this);
         this.node.runAction(cc.sequence(run_action,gap_action,finished));
+        this.attack_over_time = Date.now() + this.attack_cd*1000;
     }
     /**
      * 逐日剑法
