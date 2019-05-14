@@ -305,7 +305,7 @@ export default class Hero extends cc.Component {
         }else{
             let new_dir:number = dir - 4;
             new_dir = 4 - new_dir;
-            let animation_name:string = 'p_'+this.hero_body+'_'+this.hero_action+'_'+new_dir.toString();
+            let animation_name:string = this.hero_type+this.hero_body+'_'+this.hero_action+'_'+new_dir.toString();
             let state:cc.AnimationState = this.hero_main.play(animation_name);
             this.last_animation_name = animation_name;
             let animation_a_name:string;
