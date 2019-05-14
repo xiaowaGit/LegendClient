@@ -61,6 +61,7 @@ export default class Hero extends cc.Component {
     private main_camere:cc.Camera = null;
     private is_init:boolean = false;
 
+    private hero_type:string = 'p_';
     private hero_body:string = EMPTY_BODY;
     private hero_a:string = null;
     private hero_action:string = STAND_ACTION;
@@ -88,6 +89,7 @@ export default class Hero extends cc.Component {
     _onHemophagy: any;
     _onSkyFire: any;
     _onDelete: any;
+    _onDie: any;
 
 
 
@@ -108,6 +110,7 @@ export default class Hero extends cc.Component {
         this._onHemophagy = this.onHemophagy.bind(this);
         this._onSkyFire = this.onSkyFire.bind(this);
         this._onDelete = this.onDelete.bind(this);
+        this._onDie = this.onDie.bind(this);
 
         this.pinus.on("onMove",this._onMove);
         this.pinus.on("onAttack",this._onAttack);
@@ -126,6 +129,7 @@ export default class Hero extends cc.Component {
         this.pinus.on("onSkyFire",this._onSkyFire);
 
         this.pinus.on("onDelete",this._onDelete);
+        this.pinus.on("onDie",this._onDie);
 
         let self = this;
         this.node.on(cc.Node.EventType.TOUCH_END,function (event:cc.Event.EventTouch) {
@@ -161,6 +165,7 @@ export default class Hero extends cc.Component {
         this.hero_name = hero_name;
         this.player = player;
         this.config_name = player.config_name;
+        if (this.config_name != '人') this.hero_type = 'm_';
         this.main_camere = main_camere;
         this.play_animation(true);
         this.move_to();
@@ -275,7 +280,7 @@ export default class Hero extends cc.Component {
         this.hero_arms.node.active = this.hero_a ? true : false;
         let dir:number = parseInt(this.hero_dir);
         if (dir <= 4) {
-            let animation_name:string = 'p_'+this.hero_body+'_'+this.hero_action+'_'+this.hero_dir;
+            let animation_name:string = this.hero_type+this.hero_body+'_'+this.hero_action+'_'+this.hero_dir;
             let state:cc.AnimationState = this.hero_main.play(animation_name);
             this.last_animation_name = animation_name;
             let animation_a_name:string;
@@ -668,6 +673,16 @@ export default class Hero extends cc.Component {
         this.pinus.off("onDelete",this._onDelete);
 
         this.node.removeFromParent();
+    }
+    
+    /**
+     * 角色死亡
+     * @param data 
+     */
+    onDie(data:Player) {
+        if (!this.is_init || (data.player.name != this.hero_name)) return;
+        this.hero_action = DIE_ACTION;
+        this.play_animation(false);
     }
     ///////////////////////////////操作接口////////////////////////////////////
     
