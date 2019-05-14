@@ -633,6 +633,7 @@ export default class Hero extends cc.Component {
      * @param data 
      */
     onDelete(data:Player) {
+        if (!this.is_init || (data.player.name != this.hero_name)) return;
         let player:GameInfo = GameUtils.player_info;
         let other_players:Player[] = player.other_players;
         let new_players:Player[] = [];
