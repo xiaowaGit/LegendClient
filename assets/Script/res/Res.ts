@@ -175,7 +175,10 @@ export default class Res extends cc.Component {
                             this.uuse_res(GameUtils.selete_target.get_name(),null);
                             this.tick_cd(config.cd);
                         }
-                    }else if (effect_info && (effect_info.name == "狂风斩" || effect_info.name == "治愈术" || effect_info.name == "骷髅" || effect_info.name == "麒麟" || effect_info.name == "哮天犬")) {
+                    }else if (effect_info && (effect_info.name == "狂风斩" || effect_info.name == "治愈术")) {
+                        this.uuse_res('',null);
+                        this.tick_cd(config.cd);
+                    }else if (config.name == "灵引符" || config.name == "化魂符" || config.name == "飞仙符") {
                         this.uuse_res('',null);
                         this.tick_cd(config.cd);
                     }

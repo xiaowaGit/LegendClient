@@ -1,6 +1,6 @@
 import Hero from "../hero/Hero";
 import { GameUtils } from "../utils/GameUtils";
-import { ResFloorInfo, PP, Point, EffectConfig, dir_to_p, compute_dir, p_to_pots, get_l } from "../utils/tool";
+import { ResFloorInfo, PP, Point, EffectConfig, dir_to_p, compute_dir, p_to_pots, get_l, GameInfo, Player } from "../utils/tool";
 import ResFloor from "../res/ResFloor";
 import MainUI from "../ui/MainUI";
 
@@ -34,7 +34,7 @@ export default class GameScene extends cc.Component {
     main_ui:MainUI = null;
 
     private hero:Hero = null;
-    private other_heros:Hero[] = [];
+    public other_heros:Hero[] = [];
     private ress:ResFloor[] = [];
     private pinus:Pomelo = null;
     private goto_time:number = 0;

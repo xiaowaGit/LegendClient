@@ -1,6 +1,7 @@
 import { GameUtils } from "../utils/GameUtils";
-import { get_l, Player, ClothesConfig, ArmsConfig } from "../utils/tool";
+import { get_l, Player, ClothesConfig, ArmsConfig, Point, GameInfo } from "../utils/tool";
 import { get_body, get_arms } from "./HeroConfig";
+import Effect from "../effect/Effect";
 
 const {ccclass, property} = cc._decorator;
 
@@ -51,6 +52,9 @@ export default class Hero extends cc.Component {
     @property(cc.Animation)
     spr_skill:cc.Animation = null;
 
+    @property(cc.Prefab)
+    effect_pre:cc.Prefab = null;
+
     private pinus:Pomelo = null;
     private hero_name:string = null;
     private player:Player = null;
@@ -70,15 +74,58 @@ export default class Hero extends cc.Component {
 
     private attack_over_time:number = Date.now();//攻击CD记时
     private attack_cd:number = 1.1;//攻击CD秒
+    
+    _onMove: any;
+    _onAttack: any;
+    _onRagingFire: any;
+    _onPursueSun: any;
+    _onUpdate: any;
+    _onCure_Add: any;
+    _onCallPet: any;
+    _onFierceWind: any;
+    _onHailstorm: any;
+    _onMeteorSwarm: any;
+    _onHemophagy: any;
+    _onSkyFire: any;
+    _onDelete: any;
+
+
 
     onLoad () {
         let pinus = GameUtils.getInstance().pinus;
         this.pinus = pinus;
-        this.pinus.on("onMove",this.onMove.bind(this));
-        this.pinus.on("onAttack",this.onAttack.bind(this));
-        this.pinus.on("onRagingFire",this.onRagingFire.bind(this));
-        this.pinus.on("onPursueSun",this.onPursueSun.bind(this));
-        this.pinus.on("onUpdate",this.onUpdate.bind(this));
+
+        this._onMove = this.onMove.bind(this);
+        this._onAttack = this.onAttack.bind(this);
+        this._onRagingFire = this.onRagingFire.bind(this);
+        this._onPursueSun = this.onPursueSun.bind(this);
+        this._onUpdate = this.onUpdate.bind(this);
+        this._onCure_Add = this.onCure_Add.bind(this);
+        this._onCallPet = this.onCallPet.bind(this);
+        this._onFierceWind = this.onFierceWind.bind(this);
+        this._onHailstorm = this.onHailstorm.bind(this);
+        this._onMeteorSwarm = this.onMeteorSwarm.bind(this);
+        this._onHemophagy = this.onHemophagy.bind(this);
+        this._onSkyFire = this.onSkyFire.bind(this);
+        this._onDelete = this.onDelete.bind(this);
+
+        this.pinus.on("onMove",this._onMove);
+        this.pinus.on("onAttack",this._onAttack);
+        this.pinus.on("onRagingFire",this._onRagingFire);
+        this.pinus.on("onPursueSun",this._onPursueSun);
+        this.pinus.on("onUpdate",this._onUpdate);
+        //////主动
+        this.pinus.on("onCure_Add",this._onCure_Add);
+        this.pinus.on("onCallPet",this._onCallPet);
+        this.pinus.on("onFierceWind",this._onFierceWind);
+        ////// 主动和点
+        this.pinus.on("onHailstorm",this._onHailstorm);
+        this.pinus.on("onMeteorSwarm",this._onMeteorSwarm);
+        ////// 主动和目标
+        this.pinus.on("onHemophagy",this._onHemophagy);
+        this.pinus.on("onSkyFire",this._onSkyFire);
+
+        this.pinus.on("onDelete",this._onDelete);
 
         let self = this;
         this.node.on(cc.Node.EventType.TOUCH_END,function (event:cc.Event.EventTouch) {
@@ -399,7 +446,6 @@ export default class Hero extends cc.Component {
         this.node.stopAllActions();
         let dir:number = data.dir;
         let current_dir:string = Hero.dir_transform(dir);
-        ///todo:播放烈火特效
 
         let run_action:cc.FiniteTimeAction = cc.callFunc(function() {
             this.hero_action = ATTACK_ACTION;
@@ -413,6 +459,214 @@ export default class Hero extends cc.Component {
             this.play_animation(true);
         }, this);
         this.node.runAction(cc.sequence(run_action,gap_action,finished));
+        /// 场景上表现效果
+        let node = cc.instantiate(this.effect_pre);
+        let effect:Effect = node.getComponent(Effect);
+        effect.init("onPursueSun",this.get_pot(),GameUtils.game_scene.map.node,dir);
+    }
+
+    /**
+     * 角色展示施法动作
+     * @param e_pot 
+     */
+    private skill_action(e_pot?:Point) {
+        let current_dir:string;
+        if(e_pot) current_dir = this.compute_dir_by_self(e_pot);
+        else current_dir = this.hero_dir;
+        let run_action:cc.FiniteTimeAction = cc.callFunc(function() {
+            this.hero_action = SPELL_ACTION;
+            this.hero_dir = current_dir;
+            this.play_animation(false);
+        }, this);
+        let gap_action:cc.FiniteTimeAction = cc.delayTime(this.attack_cd);
+        let finished:cc.FiniteTimeAction = cc.callFunc(function() {
+            this.hero_action = STAND_ACTION;
+            this.hero_dir = current_dir;
+            this.play_animation(true);
+        }, this);
+        this.node.runAction(cc.sequence(run_action,gap_action,finished));
+    }
+
+    /**
+     * 使用药品（自身法术）
+     * @param data 
+     */
+    onCure_Add(data: any) {
+        let {active,blood,magic} = data;
+        if (!this.is_init || data.active != this.hero_name) return;
+        ////表现效果
+        let node = cc.instantiate(this.effect_pre);
+        let effect:Effect = node.getComponent(Effect);
+        effect.init("onCure_Add",{x:0,y:0},this.node);
+        
+        //// 飘字
+        let node_blood:cc.Node = new cc.Node();
+        node_blood.addComponent(cc.Label);
+        let lbl_blood:cc.Label = node_blood.getComponent(cc.Label);
+        lbl_blood.fontSize = 20;
+        lbl_blood.node.color = cc.color(255,0,0,255);
+        this.node.addChild(lbl_blood.node);
+        lbl_blood.string = "气血增加:"+blood;
+        lbl_blood.node.position = new cc.Vec2(0,0);
+        
+        let node_magic:cc.Node = new cc.Node();
+        node_magic.addComponent(cc.Label);
+        let lbl_magic:cc.Label = node_magic.getComponent(cc.Label);
+        lbl_magic.fontSize = 20;
+        lbl_magic.node.color = cc.color(0,0,255,255);
+        this.node.addChild(lbl_magic.node);
+        lbl_magic.string = "魔法增加:"+magic;
+        lbl_magic.node.position = new cc.Vec2(0,0);
+
+        function build_action(node:cc.Node,out_time?:number):cc.FiniteTimeAction {
+            let run_action:cc.FiniteTimeAction = cc.moveTo(2,0,100);
+            let finished:cc.FiniteTimeAction = cc.callFunc(function() {
+                node.parent = null;
+            });
+            if (!out_time) {
+                return cc.sequence(run_action,finished);
+            }else{
+                let gap_action:cc.FiniteTimeAction = cc.delayTime(out_time);
+                return cc.sequence(gap_action,run_action,finished);
+            }
+        }
+        node_blood.runAction(build_action(node_blood));
+        node_magic.runAction(build_action(node_magic,1));
+        
+        if (parseInt(this.hero_dir) > 4) {
+            node_blood.scaleX = -1;
+            node_magic.scaleX = -1;
+        }
+    }
+    /**
+     * 召唤宠物（自身法术）
+     * @param data 
+     */
+    onCallPet(data: any) {
+        let {active} = data;
+        if (!this.is_init || data.active != this.hero_name) return;
+        ////表现效果
+        let node = cc.instantiate(this.effect_pre);
+        let effect:Effect = node.getComponent(Effect);
+        effect.init("onCallPet",{x:0,y:0},this.node);
+        this.skill_action();
+    }
+    /**
+     * 使用狂风斩（自身法术）
+     * @param data 
+     */
+    onFierceWind(data: any) {
+        let {active} = data;
+        if (!this.is_init || data.active != this.hero_name) return;
+        ////表现效果
+        let node = cc.instantiate(this.effect_pre);
+        let effect:Effect = node.getComponent(Effect);
+        effect.init("onFierceWind",{x:0,y:0},this.node);
+        this.skill_action();
+    }
+
+
+    /**
+     * 冰咆哮（范围法术）
+     * @param data 
+     */
+    onHailstorm(data: any) {
+        let {active,pot} = data;
+        if (!this.is_init || data.active != this.hero_name) return;
+        ////表现效果
+        let node = cc.instantiate(this.effect_pre);
+        let effect:Effect = node.getComponent(Effect);
+        effect.init("onHailstorm",pot,GameUtils.game_scene.map.node);
+        this.skill_action(pot);
+    }
+    /**
+     * 流星火雨（范围法术）
+     * @param data 
+     */
+    onMeteorSwarm(data: any) {
+        let {active,pot} = data;
+        if (!this.is_init || data.active != this.hero_name) return;
+        ////表现效果
+        let node = cc.instantiate(this.effect_pre);
+        let effect:Effect = node.getComponent(Effect);
+        effect.init("onMeteorSwarm",pot,GameUtils.game_scene.map.node);
+        this.skill_action(pot);
+    }
+
+
+    /**
+     * 嗜血术(单秒法术)
+     * @param data 
+     */
+    onHemophagy(data: any) {
+        let {active,target} = data;
+        if (!this.is_init || (active != this.hero_name && target != this.hero_name)) return;
+        ////表现效果
+        if (active == this.hero_name) {
+            this.skill_action();
+        }else if (target == this.hero_name) {
+            let node = cc.instantiate(this.effect_pre);
+            let effect:Effect = node.getComponent(Effect);
+            effect.init("onHemophagy",{x:0,y:0},this.node);
+        }
+    }
+    /**
+     * 灭天火(单秒法术)
+     * @param data 
+     */
+    onSkyFire(data: any) {
+        let {active,target} = data;
+        if (!this.is_init || (active != this.hero_name && target != this.hero_name)) return;
+        ////表现效果
+        if (active == this.hero_name) {
+            this.skill_action();
+        }else if (target == this.hero_name) {
+            let node = cc.instantiate(this.effect_pre);
+            let effect:Effect = node.getComponent(Effect);
+            effect.init("onSkyFire",{x:0,y:0},this.node);
+        }
+    }
+
+    
+    /**
+     * 删除角色
+     * @param data 
+     */
+    onDelete(data:Player) {
+        let player:GameInfo = GameUtils.player_info;
+        let other_players:Player[] = player.other_players;
+        let new_players:Player[] = [];
+        other_players.forEach(element => {
+            if (element.player.name != data.player.name) new_players.push(element);
+        });
+        player.other_players = new_players;
+
+        let other_heros:Hero[] = GameUtils.game_scene.other_heros;
+        let new_heros:Hero[] = [];
+        other_heros.forEach(element => {
+            if (element.get_name() != data.player.name) new_heros.push(element);
+        });
+        GameUtils.game_scene.other_heros = new_heros;
+
+        this.pinus.off("onMove",this._onMove);
+        this.pinus.off("onAttack",this._onAttack);
+        this.pinus.off("onRagingFire",this._onRagingFire);
+        this.pinus.off("onPursueSun",this._onPursueSun);
+        this.pinus.off("onUpdate",this._onUpdate);
+        //////主动
+        this.pinus.off("onCure_Add",this._onCure_Add);
+        this.pinus.off("onCallPet",this._onCallPet);
+        this.pinus.off("onFierceWind",this._onFierceWind);
+        ////// 主动和点
+        this.pinus.off("onHailstorm",this._onHailstorm);
+        this.pinus.off("onMeteorSwarm",this._onMeteorSwarm);
+        ////// 主动和目标
+        this.pinus.off("onHemophagy",this._onHemophagy);
+        this.pinus.off("onSkyFire",this._onSkyFire);
+
+        this.pinus.off("onDelete",this._onDelete);
+
+        this.node.removeFromParent();
     }
     ///////////////////////////////操作接口////////////////////////////////////
     
