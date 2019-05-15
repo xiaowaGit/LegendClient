@@ -29,7 +29,7 @@ export default class LoginScene extends cc.Component {
         this.btn_login.interactable = false;
         GameUtils.getInstance().init();
         var pinus = GameUtils.getInstance().pinus;
-        var host = "127.0.0.1";
+        var host = "47.99.218.131";
         var username:string = this.edit_name.string;
 
         let self = this;
