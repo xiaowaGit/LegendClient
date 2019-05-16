@@ -475,6 +475,7 @@ export default class Hero extends cc.Component {
      * @param e_pot 
      */
     private skill_action(e_pot?:Point) {
+        this.node.stopAllActions();
         let current_dir:string;
         if(e_pot) current_dir = this.compute_dir_by_self(e_pot);
         else current_dir = this.hero_dir;
@@ -671,6 +672,7 @@ export default class Hero extends cc.Component {
         this.pinus.off("onSkyFire",this._onSkyFire);
 
         this.pinus.off("onDelete",this._onDelete);
+        this.pinus.off("onDie",this._onDie);
 
         this.node.removeFromParent();
     }
@@ -681,6 +683,7 @@ export default class Hero extends cc.Component {
      */
     onDie(data:Player) {
         if (!this.is_init || (data.player.name != this.hero_name)) return;
+        this.node.stopAllActions();
         this.hero_action = DIE_ACTION;
         this.play_animation(false);
     }
