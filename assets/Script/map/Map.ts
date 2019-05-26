@@ -3,7 +3,7 @@ import { GameUtils } from "../utils/GameUtils";
 
 const {ccclass, property} = cc._decorator;
 
-let LOAD_MAP_L:number = 300; // 加载地图检测距离
+let LOAD_MAP_L:number = 1000; // 加载地图检测距离
 
 let B_MAP_W:number = 13120;
 let B_MAP_H:number = 7041;
@@ -115,11 +115,13 @@ export default class NewClass extends cc.Component {
     /**
      * 开始加载地图
      */
-    start_load_c_map() {
+    start_load_c_map(c_index:number) {
         if (this.is_load) return;
+        this.load_c_map = c_index;
         let name:string = this.get_map_name();
         console.log("xiaowa ==== start load :",name);
         let map_pot:Point = get_map_centre(this.load_c_map);
+        let map_size:{weight:number,height:number} = get_map_size(this.load_c_map);
         cc.loader.loadRes(name,cc.SpriteFrame,function(err,spriteFrame){
             if (err) {
                 cc.error(err.message || err);
@@ -129,8 +131,11 @@ export default class NewClass extends cc.Component {
             node.addComponent(cc.Sprite);
             let spr:cc.Sprite = node.getComponent(cc.Sprite);
             spr.spriteFrame = spriteFrame;
+            spr.trim = false;
+            spr.sizeMode = cc.Sprite.SizeMode.RAW;
             spr.node.setAnchorPoint(0.5,0.5);
             spr.node.setPosition(map_pot.x,map_pot.y);
+            // console.log("xiaowa ==== index:",this.load_c_map,"map_pot:",map_pot.x,map_pot.y)
             spr.node.parent = this.node;
             this.load_e_dic[this.load_c_map] = this.load_c_map;
             this.del_map(this.load_c_map);
@@ -153,8 +158,7 @@ export default class NewClass extends cc.Component {
             }
         });
         if (c_index) {
-            this.load_c_map = c_index;
-            this.start_load_c_map();
+            this.start_load_c_map(c_index);
         }
     }
 
