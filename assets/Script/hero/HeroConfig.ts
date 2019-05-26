@@ -24,3 +24,10 @@ export function get_body(clothes:ClothesConfig):string {
     if (clothes && clothes.name == '守护之铠') body = '002';
     return body;
 }
+
+export function get_monster_body(config_name:string):string {
+    let body = '001';
+    if (config_name == '麒麟')body = '002';
+    else if (config_name == '哮天犬')body = '003';
+    return body;
+}

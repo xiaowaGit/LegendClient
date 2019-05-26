@@ -1,12 +1,12 @@
 import { GameUtils } from "../utils/GameUtils";
 import { get_l, Player, ClothesConfig, ArmsConfig, Point, GameInfo } from "../utils/tool";
-import { get_body, get_arms } from "./HeroConfig";
+import { get_body, get_arms, get_monster_body } from "./HeroConfig";
 import Effect from "../effect/Effect";
 
 const {ccclass, property} = cc._decorator;
 
 /// 角色Y轴偏移常量
-let OFFSET_Y:{} = {'人':30,'骷髅':40,'麒麟':50,'哮天犬':60};
+let OFFSET_Y:{} = {'人':30,'骷髅':40,'麒麟':60,'哮天犬':40};
 
 /// 身体常量
 let EMPTY_BODY:string = '001';//空的身体
@@ -165,7 +165,10 @@ export default class Hero extends cc.Component {
         this.hero_name = hero_name;
         this.player = player;
         this.config_name = player.config_name;
-        if (this.config_name != '人') this.hero_type = 'm_';
+        if (this.config_name != '人') {
+            this.hero_type = 'm_';
+            this.hero_body = get_monster_body(this.config_name);
+        }
         this.main_camere = main_camere;
         this.play_animation(true);
         this.move_to();
