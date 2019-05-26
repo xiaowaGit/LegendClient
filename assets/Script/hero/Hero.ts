@@ -336,8 +336,8 @@ export default class Hero extends cc.Component {
             let camera_pot:{x:number,y:number} = {x:pot.x - 568,y:pot.y - 320};
             camera_pot.x = camera_pot.x < 0 ? 0 : camera_pot.x;
             camera_pot.y = camera_pot.y < 0 ? 0 : camera_pot.y;
-            camera_pot.x = camera_pot.x > 10000-1136 ? 10000-1136 : camera_pot.x;
-            camera_pot.y = camera_pot.y > 10000-640 ? 10000-640 : camera_pot.y;
+            camera_pot.x = camera_pot.x > 13120-1136 ? 13120-1136 : camera_pot.x;
+            camera_pot.y = camera_pot.y > 7041-640 ? 7041-640 : camera_pot.y;
             this.main_camere.node.x = camera_pot.x;
             this.main_camere.node.y = camera_pot.y;
         }

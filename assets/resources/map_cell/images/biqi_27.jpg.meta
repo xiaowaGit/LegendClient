@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "55e1e894-4656-4e5c-b701-ba52f15648fc",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "biqi_27": {
+      "ver": "1.0.3",
+      "uuid": "d7d805d7-514e-4c24-b64f-cd8920c41c6d",
+      "rawTextureUuid": "55e1e894-4656-4e5c-b701-ba52f15648fc",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 960,
+      "height": 960,
+      "rawWidth": 960,
+      "rawHeight": 960,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

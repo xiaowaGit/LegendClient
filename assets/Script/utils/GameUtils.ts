@@ -12,7 +12,7 @@ export class GameUtils {
 
     public static player_info:GameInfo = null;
     public static player_ress:ResInfo[] = null;
-    public static map_scale:number = 20; //方块大小
+    public static map_scale:number = 32; //方块大小
     public static selete_target:Hero = null;
     public static attack_target:Hero = null;
     public static self_player:Hero = null;
