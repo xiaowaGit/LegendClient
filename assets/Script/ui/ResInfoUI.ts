@@ -10,16 +10,37 @@ let EFFECT_NAME = {'attack':"攻击",'assist':"辅助",'hinder':"障碍"};
 @ccclass
 export default class ResInfoUI extends cc.Component {
 
+    @property(cc.Button)
+    btn_discard: cc.Button = null;
+
     @property(cc.Sprite)
     spr_bg: cc.Sprite = null;
 
     private cell:cc.Node = null;
 
+    private _index:number = null;
+
     // onLoad () {}
 
-    // start () {}
+    start () {
+        let self = this;
+        this.btn_discard.node.on("click",function () {
+            self.discard();
+        },this);
+    }
 
-    show(data:ResInfo,pot:cc.Vec2) {
+    discard() {
+        var pinus = GameUtils.getInstance().pinus;
+        var route = "scene.sceneHandler.discard";
+        pinus.request(route,{
+            index:this._index
+        }, function(data) {
+            cc.log(data);
+        });
+        this.close();
+    }
+
+    show(data:ResInfo,pot:cc.Vec2,index:number = null) {
         if (this.cell) {
             this.cell.removeFromParent();
             this.cell = null;
@@ -127,6 +148,16 @@ export default class ResInfoUI extends cc.Component {
         this.node.addChild(cell);
         this.cell = cell;
         this.move(pot,250,Math.abs(off_y));
+        this._index = index;
+        if (index == null) {
+            this.btn_discard.enabled = false;
+            this.btn_discard.interactable = false;
+            this.btn_discard.node.active = false;
+        }else{
+            this.btn_discard.enabled = true;
+            this.btn_discard.interactable = true;
+            this.btn_discard.node.active = true;
+        }
     }
 
     add (key:string,config:any,cell:cc.Node,off_y:number,add_y:number,str:string):number {

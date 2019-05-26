@@ -6,7 +6,7 @@ import Effect from "../effect/Effect";
 const {ccclass, property} = cc._decorator;
 
 /// 角色Y轴偏移常量
-let OFFSET_Y:{} = {'人':30,'骷髅':40,'麒麟':60,'哮天犬':40};
+let OFFSET_Y:{} = {'人':30,'骷髅':40,'麒麟':60,'哮天犬':30};
 
 /// 身体常量
 let EMPTY_BODY:string = '001';//空的身体

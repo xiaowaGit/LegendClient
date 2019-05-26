@@ -141,7 +141,7 @@ export default class Res extends cc.Component {
             if (this.is_copy == false && get_l(this.pot_start,this.pot_end) < 20) { // 显示详情面板
                 let out:cc.Vec2 = new cc.Vec2();
                 pot = GameUtils.ui_camera.getCameraToWorldPoint(pot,out);
-                GameUtils.res_info_ui.show(this._res_data,out);
+                GameUtils.res_info_ui.show(this._res_data,out,this._index == -1 ? null : this._index);
                 this.node.x = 0;
                 this.node.y = 0;
             }else if (this.is_copy == false && get_l(this.pot_start,this.pot_end) >= 20 && this._index != -1) { //装备物品或者设置快捷方式
