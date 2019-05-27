@@ -6,7 +6,7 @@ import Effect from "../effect/Effect";
 const {ccclass, property} = cc._decorator;
 
 /// 角色Y轴偏移常量
-let OFFSET_Y:{} = {'人':30,'骷髅':40,'麒麟':60,'哮天犬':30};
+let OFFSET_Y:{} = {'人':30,'骷髅':40,'麒麟':60,'哮天犬':30,'抓猫':18,'鸡':-10,'稻草人':18,'钉耙猫':30,'绿野人':18,'刀骷髅':50};
 
 /// 身体常量
 let EMPTY_BODY:string = '001';//空的身体
@@ -45,6 +45,9 @@ export default class Hero extends cc.Component {
 
     @property(cc.Animation)
     hero_main:cc.Animation = null;
+    
+    @property(cc.Animation)
+    hero_main_2:cc.Animation = null;
 
     @property(cc.Animation)
     hero_arms:cc.Animation = null;
@@ -67,6 +70,7 @@ export default class Hero extends cc.Component {
     private hero_action:string = STAND_ACTION;
     private hero_dir:string = DOWN_DIR;
 
+    private current_hero_main:cc.Animation = null;
     private last_animation_name:string = null;
     private config_name:string = null;
 
@@ -150,9 +154,31 @@ export default class Hero extends cc.Component {
         this.update_player(data);
     }
 
+    private update_body() {
+        this.last_animation_name = null;
+        let body_code:string = this.hero_type + this.hero_body;
+        let body_dic:{} = {
+            'm_008':1,
+            'm_009':1,
+            'p_003':1,
+            'p_004':1,
+            'p_005':1,
+        };
+        if (body_dic[body_code] == 1) {
+            this.current_hero_main = this.hero_main_2;
+            this.hero_main_2.node.active = true;
+            this.hero_main.node.active = false;
+        }else{
+            this.current_hero_main = this.hero_main;
+            this.hero_main_2.node.active = false;
+            this.hero_main.node.active = true;
+        }
+    }
+
     public update_player(player:Player) {
         this.player = player;
         this.hero_body = get_body(player.clothes && <ClothesConfig>player.clothes.config);
+        this.update_body();
         this.hero_a = get_arms(player.arms && <ArmsConfig>player.arms.config);
         /// 更新全局数据
         let other_players:Player[] = GameUtils.player_info.other_players;
@@ -169,6 +195,7 @@ export default class Hero extends cc.Component {
             this.hero_type = 'm_';
             this.hero_body = get_monster_body(this.config_name);
         }
+        this.update_body();
         this.main_camere = main_camere;
         this.play_animation(true);
         this.move_to();
@@ -275,7 +302,7 @@ export default class Hero extends cc.Component {
     private play_animation(loop:boolean) {
         let frame:number = 0;
         if (this.last_animation_name) {
-            let state:cc.AnimationState = this.hero_main.getAnimationState(this.last_animation_name);
+            let state:cc.AnimationState = this.current_hero_main.getAnimationState(this.last_animation_name);
             let time:number = state.time;
             frame = time * FRAME_RATE;
         }
@@ -284,7 +311,7 @@ export default class Hero extends cc.Component {
         let dir:number = parseInt(this.hero_dir);
         if (dir <= 4) {
             let animation_name:string = this.hero_type+this.hero_body+'_'+this.hero_action+'_'+this.hero_dir;
-            let state:cc.AnimationState = this.hero_main.play(animation_name);
+            let state:cc.AnimationState = this.current_hero_main.play(animation_name);
             this.last_animation_name = animation_name;
             let animation_a_name:string;
             let state_a:cc.AnimationState;
@@ -309,7 +336,7 @@ export default class Hero extends cc.Component {
             let new_dir:number = dir - 4;
             new_dir = 4 - new_dir;
             let animation_name:string = this.hero_type+this.hero_body+'_'+this.hero_action+'_'+new_dir.toString();
-            let state:cc.AnimationState = this.hero_main.play(animation_name);
+            let state:cc.AnimationState = this.current_hero_main.play(animation_name);
             this.last_animation_name = animation_name;
             let animation_a_name:string;
             let state_a:cc.AnimationState;
