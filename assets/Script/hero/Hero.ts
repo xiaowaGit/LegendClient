@@ -173,13 +173,15 @@ export default class Hero extends cc.Component {
             this.hero_main_2.node.active = false;
             this.hero_main.node.active = true;
         }
+        if (this.hero_action == STAND_ACTION)this.play_animation(true);
+        else this.play_animation(false);
     }
 
     public update_player(player:Player) {
         this.player = player;
         this.hero_body = get_body(player.clothes && <ClothesConfig>player.clothes.config);
-        this.update_body();
         this.hero_a = get_arms(player.arms && <ArmsConfig>player.arms.config);
+        this.update_body();
         /// 更新全局数据
         let other_players:Player[] = GameUtils.player_info.other_players;
         other_players.forEach((player,index,array) => {
@@ -197,9 +199,9 @@ export default class Hero extends cc.Component {
         }
         this.update_body();
         this.main_camere = main_camere;
-        this.play_animation(true);
         this.move_to();
         this.hero_main.node.y = OFFSET_Y[this.config_name];
+        this.hero_main_2.node.y = OFFSET_Y[this.config_name];
         this.hero_arms.node.y = OFFSET_Y[this.config_name];
         this.is_init = true;
     }
