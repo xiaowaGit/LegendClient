@@ -370,8 +370,16 @@ export default class Hero extends cc.Component {
             camera_pot.y = camera_pot.y < 0 ? 0 : camera_pot.y;
             camera_pot.x = camera_pot.x > 13120-1136 ? 13120-1136 : camera_pot.x;
             camera_pot.y = camera_pot.y > 7041-640 ? 7041-640 : camera_pot.y;
-            this.main_camere.node.x = camera_pot.x;
-            this.main_camere.node.y = camera_pot.y;
+
+            /// xiaowa 缓动
+            let ox:number = this.main_camere.node.x;
+            let oy:number = this.main_camere.node.y;
+            let ex:number = camera_pot.x;
+            let ey:number = camera_pot.y;
+            let cx:number = ex - ox;
+            let cy:number = ey - oy;
+            this.main_camere.node.x += cx / 2;
+            this.main_camere.node.y += cy / 2;
         }
     }
 

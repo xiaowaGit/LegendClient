@@ -22,7 +22,7 @@
     "portrait": false,
     "upsideDown": false
   },
-  "packageName": "org.cocos2d.helloworld",
+  "packageName": "org.cocos2d.legend",
   "qqplay": {
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait",
