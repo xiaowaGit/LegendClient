@@ -4,6 +4,7 @@ import { GameUtils } from "../utils/GameUtils";
 const {ccclass, property} = cc._decorator;
 
 let LOAD_MAP_L:number = 1000; // 加载地图检测距离
+let UNLOAD_MAP_L:number = 2000; // 加载地图检测距离
 
 let B_MAP_W:number = 13120;
 let B_MAP_H:number = 7041;
@@ -44,7 +45,7 @@ function get_map_centre(map_index) {
 }
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class Map extends cc.Component {
 
     @property
     map_type:'floor'|'mask' = 'floor';
@@ -69,6 +70,7 @@ export default class NewClass extends cc.Component {
             this.map_s = 'mask_cell/images/biqi_mask_';
             this.map_e = '.png';
         }
+        this.map_e = "";
         this.on_load = true;
     }
 
@@ -137,7 +139,7 @@ export default class NewClass extends cc.Component {
             spr.node.setPosition(map_pot.x,map_pot.y);
             // console.log("xiaowa ==== index:",this.load_c_map,"map_pot:",map_pot.x,map_pot.y)
             spr.node.parent = this.node;
-            this.load_e_dic[this.load_c_map] = this.load_c_map;
+            this.load_e_dic[this.load_c_map] = {name,spr};
             this.del_map(this.load_c_map);
             this.load_c_map = null;
             this.is_load = false;
@@ -159,6 +161,19 @@ export default class NewClass extends cc.Component {
         });
         if (c_index) {
             this.start_load_c_map(c_index);
+        }
+        // let d_index:number,d_l:number;
+        for (const index in this.load_e_dic) {
+            if (this.load_e_dic.hasOwnProperty(index)) {
+                const obj:{name:string,spr:cc.Sprite} = this.load_e_dic[index];
+                let map_pot:Point = get_map_centre(~~index);
+                let l:number = get_l(p_pot,map_pot);
+                if (l > UNLOAD_MAP_L) {
+                    obj.spr.node.removeFromParent();
+                    cc.loader.releaseRes(obj.name, cc.SpriteFrame);
+                    delete this.load_e_dic[index];
+                }
+            }
         }
     }
 
