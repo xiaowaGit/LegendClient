@@ -196,8 +196,10 @@ export default class Hero extends cc.Component {
         if (this.config_name != '人') {
             this.hero_type = 'm_';
             this.hero_body = get_monster_body(this.config_name);
+            this.update_body();
+        }else{
+            this.update_player(this.player);
         }
-        this.update_body();
         this.main_camere = main_camere;
         this.move_to();
         this.hero_main.node.y = OFFSET_Y[this.config_name];
