@@ -58,6 +58,9 @@ export default class Hero extends cc.Component {
     @property(cc.Prefab)
     effect_pre:cc.Prefab = null;
 
+    @property(cc.Label)
+    lbl_name:cc.Label = null;
+
     private pinus:Pomelo = null;
     private hero_name:string = null;
     private player:Player = null;
@@ -197,14 +200,17 @@ export default class Hero extends cc.Component {
             this.hero_type = 'm_';
             this.hero_body = get_monster_body(this.config_name);
             this.update_body();
+            this.lbl_name.node.color = cc.color(255,0,0,255);
         }else{
             this.update_player(this.player);
+            this.lbl_name.node.color = cc.color(255,255,0,255);
         }
         this.main_camere = main_camere;
         this.move_to();
         this.hero_main.node.y = OFFSET_Y[this.config_name];
         this.hero_main_2.node.y = OFFSET_Y[this.config_name];
         this.hero_arms.node.y = OFFSET_Y[this.config_name];
+        this.lbl_name.string = this.hero_name;
         this.is_init = true;
     }
 
@@ -336,6 +342,7 @@ export default class Hero extends cc.Component {
                 }
             }
             this.hero.scaleX = 1;
+            this.lbl_name.node.scaleX = 1;
         }else{
             let new_dir:number = dir - 4;
             new_dir = 4 - new_dir;
@@ -361,6 +368,7 @@ export default class Hero extends cc.Component {
                 }
             }
             this.hero.scaleX = -1;
+            this.lbl_name.node.scaleX = -1;
         }
     }
 
