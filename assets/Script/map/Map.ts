@@ -171,6 +171,7 @@ export default class Map extends cc.Component {
                 if (l > UNLOAD_MAP_L) {
                     obj.spr.node.removeFromParent();
                     cc.loader.releaseRes(obj.name, cc.SpriteFrame);
+                    cc.loader.releaseRes(obj.name, cc.Texture2D);
                     delete this.load_e_dic[index];
                 }
             }
