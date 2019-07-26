@@ -192,15 +192,35 @@ export default class Hero extends cc.Component {
         },this);
     }
 
+    public static get_real_config_name(config_name:string) {
+        let top:string = config_name.substring(0,2);
+        if (top == "精英") {
+            return config_name.substring(2);
+        }else if (top == "王者") {
+            return config_name.substring(2);
+        }
+        return config_name;
+    }
+
+    public static get_real_config_color(config_name:string) {
+        let top:string = config_name.substring(0,2);
+        if (top == "精英") {
+            return cc.color(0,255,0,255);
+        }else if (top == "王者") {
+            return cc.color(255,0,0,255);
+        }
+        return cc.color(0,0,255,255);
+    }
+
     init(hero_name:string,player:any,main_camere:cc.Camera) {
         this.hero_name = hero_name;
         this.player = player;
-        this.config_name = player.config_name;
+        this.config_name = Hero.get_real_config_name(player.config_name);
         if (this.config_name != '人') {
             this.hero_type = 'm_';
             this.hero_body = get_monster_body(this.config_name);
             this.update_body();
-            this.lbl_name.node.color = cc.color(255,0,0,255);
+            this.lbl_name.node.color = Hero.get_real_config_color(player.config_name);
         }else{
             this.update_player(this.player);
             this.lbl_name.node.color = cc.color(255,255,0,255);
