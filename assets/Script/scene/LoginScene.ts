@@ -29,8 +29,8 @@ export default class LoginScene extends cc.Component {
         this.btn_login.interactable = false;
         GameUtils.getInstance().init();
         var pinus = GameUtils.getInstance().pinus;
-        var host = "17731in702.iask.in";
-        // var host = "127.0.0.1";
+        //var host = "17731in702.iask.in";
+        var host = "127.0.0.1";
         var username:string = this.edit_name.string;
 
         let self = this;
@@ -39,7 +39,7 @@ export default class LoginScene extends cc.Component {
             var route = 'gate.gateHandler.queryEntry';
             pinus.init({
                 host: host,
-                port: 20282,
+                port: 3014,
                 log: true
             }, function() {
                 pinus.request(route, {
@@ -52,8 +52,8 @@ export default class LoginScene extends cc.Component {
                         self.btn_login.interactable = true;
                         return;
                     }
-                    // callback(data.host, data.port);
-                    callback("17731in702.iask.in", 26127);
+                    callback(data.host, data.port);
+                    // callback("17731in702.iask.in", 26127);
                 });
             });
         };
